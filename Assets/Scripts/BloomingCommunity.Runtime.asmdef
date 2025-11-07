@@ -1,0 +1,19 @@
+{
+    "name": "BloomingCommunity.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:85f6a74d060cad547ab6eb0853804697",
+        "GUID:507d80cf36f8258488bde8c39deefd3a",
+        "GUID:8b0a0854555cab248af9398bb86d950a",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
