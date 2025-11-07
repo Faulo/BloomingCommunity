@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement data-source="project://database/Assets/Resources/New%20Game%20Asset.asset?fileID=11400000&amp;guid=ad986d02e185c97418f1701f01148478&amp;type=2#New Game Asset" style="flex-grow: 1; justify-content: center;">
+        <ui:Label text="Blooming Community" style="-unity-text-align: upper-center; -unity-font-style: bold;" />
+        <Strayfarer.UI.BindableButton text="Start" on-click="Start" />
+        <Strayfarer.UI.BindableButton text="Quit" on-click="Quit" />
+        <Bindings>
+            <ui:DataBinding property="style.display" data-source-path="displayMainMenu" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:VisualElement>
+</ui:UXML>
