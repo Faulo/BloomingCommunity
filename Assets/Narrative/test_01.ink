@@ -12,7 +12,8 @@ VAR days = 0
 # erin say
 Ein Feld!
 
-# plant flower
+# erin plant tulip
+# erin say
 Hier möchte ich etwas hinpflanzen.
 
 -> END

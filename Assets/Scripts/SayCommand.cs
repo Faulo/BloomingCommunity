@@ -1,5 +1,7 @@
+using UnityEngine;
+
 namespace BloomingCommunity.Runtime {
-    sealed class SayCommand : ICommand {
+    class SayCommand : ICommand {
         readonly CharacterControl character;
         readonly string text;
 
@@ -9,7 +11,8 @@ namespace BloomingCommunity.Runtime {
         }
 
         public bool TryUpdateAndFinish(float deltaTime) {
-            return false;
+            Debug.Log($"{character.name}: {text}");
+            return true;
         }
     }
 }
