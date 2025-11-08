@@ -1,7 +1,14 @@
 using Unity.Properties;
 using UnityEngine;
+using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
+    sealed class AvatarControl {
+        public AvatarControl(GameObject prefab) {
+
+        }
+    }
+
     sealed class GameManager {
 
         readonly GameObject gameObject;
@@ -31,7 +38,7 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal void Quit() {
-            GameObject.Destroy(gameObject);
+            UObject.Destroy(gameObject);
         }
     }
 }

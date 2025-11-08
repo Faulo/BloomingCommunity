@@ -1,6 +1,7 @@
 {
   "resolutionStrategy": "highestMinor",
   "dependencies": {
+    "com.inkle.ink-unity-integration": "1.2.2",
     "com.strayfarer.ui": "1.5.0",
     "com.unity.2d.animation": "12.0.2",
     "com.unity.2d.sprite": "1.0.0",
