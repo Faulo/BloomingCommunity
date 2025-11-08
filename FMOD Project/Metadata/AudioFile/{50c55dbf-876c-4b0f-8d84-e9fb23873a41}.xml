@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{50c55dbf-876c-4b0f-8d84-e9fb23873a41}">
+		<property name="assetPath">
+			<value>BeepBox-Song.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>19.199999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3a4eb3bb-e03c-49b5-b347-4e6545c485cb}</destination>
+		</relationship>
+	</object>
+</objects>
