@@ -7,6 +7,8 @@ namespace BloomingCommunity.Runtime {
     sealed class CharacterAsset : ScriptableObject {
         [SerializeField]
         public GameObject prefab;
+        [SerializeField]
+        public RuntimeAnimatorController animator;
         [Tag]
         [SerializeField]
         public string tag;

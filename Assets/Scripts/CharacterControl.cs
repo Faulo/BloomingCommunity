@@ -19,7 +19,10 @@ namespace BloomingCommunity.Runtime {
             gameObject = UObject.Instantiate(asset.prefab);
             gameObject.tag = asset.tag;
 
-            animator = gameObject.GetComponent<Animator>();
+            if (gameObject.TryGetComponent(out animator)) {
+                animator.runtimeAnimatorController = asset.animator;
+            }
+
             audio = gameObject.AddComponent<FMODEventPlayer>();
 
             this.asset = asset;
@@ -75,11 +78,13 @@ namespace BloomingCommunity.Runtime {
             gameObject.SetActive(isActive);
             gameObject.name = $"{asset.tag}: {state}";
 
-            if (animator) {
-                animator.Play(anim_facing[facing] + anim_state[state]);
-                gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
-            } else {
-                gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
+            if (isActive) {
+                if (animator) {
+                    animator.Play(anim_facing[facing] + anim_state[state]);
+                    gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
+                } else {
+                    gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
+                }
             }
         }
 
