@@ -13,7 +13,13 @@ namespace BloomingCommunity.Runtime {
         [SerializeField]
         public string tag;
 
-        [Space]
+        [Header("Speech")]
+        [SerializeField]
+        public float letterDuration = 0.1f;
+        [SerializeField]
+        public float speechPause = 2;
+
+        [Header("Movement")]
         [SerializeField]
         public float moveDuration = 1;
         [SerializeField]

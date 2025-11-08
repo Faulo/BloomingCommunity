@@ -11,10 +11,15 @@ namespace BloomingCommunity.Runtime {
             input.Player.AddCallbacks(this);
         }
 
+        public void Update(float deltaTime) {
+            character.Update(deltaTime);
+        }
+
         public void FixedUpdate(float deltaTime) {
             character.intendedMove = intendedMove.magnitude > MOVEMENT_DEADZONE
                 ? intendedMove.SnapToCardinal()
                 : Vector2Int.zero;
+            character.FixedUpdate(deltaTime);
         }
 
         Vector2 intendedMove;

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c07a148b83644b546928f38822192232, type: 3}
-  m_Name: R_Character_Barbara
+  m_Name: R_Character_Ruth
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
   prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
   animator: {fileID: 6227694144673515183, guid: 7ebe544012279e64ab8dafa7dd21d7d0, type: 3}
-  tag: Barbara
-  letterDuration: 0.1
+  tag: Ruth
+  letterDuration: 0.2
   speechPause: 3
-  moveDuration: 0.3
-  facingDuration: 0.1
-  blockedDuration: 0.2
+  moveDuration: 0.4
+  facingDuration: 0.2
+  blockedDuration: 0.3
   stepEvent:
     Guid:
       Data1: -1553437905

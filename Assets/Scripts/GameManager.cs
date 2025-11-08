@@ -44,6 +44,7 @@ namespace BloomingCommunity.Runtime {
                 return;
             }
 
+            avatar.Update(deltaTime);
             map.Update(deltaTime);
         }
 

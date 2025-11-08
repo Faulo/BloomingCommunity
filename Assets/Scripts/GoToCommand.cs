@@ -60,7 +60,7 @@ namespace BloomingCommunity.Runtime {
             bool canMoveVertical = map.IsFreeToMove(character.position2D + verticalMove);
             bool shouldMoveHorizontal = (character.position2D + horizontalMove) == targetPosition;
             bool canMoveHorizontal = map.IsFreeToMove(character.position2D + horizontalMove);
-            bool preferVertical = Mathf.Abs(delta.y * URandom.value) > Mathf.Abs(delta.x * URandom.value);
+            bool preferVertical = Mathf.Abs(delta.y) > Mathf.Abs(delta.x);
 
             character.intendedMove = (shouldMoveVertical, shouldMoveHorizontal, canMoveVertical, canMoveHorizontal, preferVertical) switch {
                 (true, _, _, _, _) => verticalMove,

@@ -1,14 +1,9 @@
 using Unity.Properties;
+using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
-    sealed class CharacterViewModel {
-        readonly CharacterControl character;
-
-        [CreateProperty(ReadOnly = true)]
-        public string speech => character.speechText;
-
-        public CharacterViewModel(CharacterControl character) {
-            this.character = character;
-        }
+    sealed class CharacterViewModel : ScriptableObject {
+        [CreateProperty]
+        public string speech;
     }
 }
