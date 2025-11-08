@@ -15,7 +15,7 @@ namespace BloomingCommunity.Runtime {
         readonly CharacterAsset asset;
         readonly MapControl map;
 
-        ECharacterState state = ECharacterState.Idle;
+        public ECharacterState state = ECharacterState.Idle;
 
         public CharacterControl(CharacterAsset asset, MapControl map) {
             gameObject = UObject.Instantiate(asset.prefab);
@@ -42,6 +42,7 @@ namespace BloomingCommunity.Runtime {
 
         public Vector3 position3D { get; private set; }
         public Vector2Int position2D { get; private set; }
+        public Vector2Int selectedPosition2D => position2D + facing;
 
         public Vector2Int facing = Vector2Int.down;
 
@@ -105,6 +106,8 @@ namespace BloomingCommunity.Runtime {
                             stateTimer = asset.facingDuration;
                         }
 
+                        intendedMove = Vector2Int.zero;
+
                         if (deltaTime > 0) {
                             FixedUpdate(deltaTime);
                         }
@@ -160,6 +163,9 @@ namespace BloomingCommunity.Runtime {
                         return;
                     }
 
+                    break;
+                case ECharacterState.Plant:
+                    state = ECharacterState.Idle;
                     break;
             }
         }

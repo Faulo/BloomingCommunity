@@ -40,7 +40,7 @@ namespace BloomingCommunity.Runtime {
 
             if ((character.position2D + character.facing) == targetPosition) {
                 character.intendedMove = Vector2Int.zero;
-                return true;
+                return character.state == ECharacterState.Idle;
             }
 
             SetMoveIntention(character, map, targetPosition.Value);
@@ -56,15 +56,19 @@ namespace BloomingCommunity.Runtime {
             var verticalMove = Vector2Int.up * Sign(delta.y);
             var horizontalMove = Vector2Int.right * Sign(delta.x);
 
+            bool shouldMoveVertical = (character.position2D + verticalMove) == targetPosition;
             bool canMoveVertical = map.IsFreeToMove(character.position2D + verticalMove);
+            bool shouldMoveHorizontal = (character.position2D + horizontalMove) == targetPosition;
             bool canMoveHorizontal = map.IsFreeToMove(character.position2D + horizontalMove);
             bool preferVertical = Mathf.Abs(delta.y * URandom.value) > Mathf.Abs(delta.x * URandom.value);
 
-            character.intendedMove = (canMoveVertical, canMoveHorizontal, preferVertical) switch {
-                (true, _, true) => verticalMove,
-                (_, true, _) => horizontalMove,
-                (_, _, true) => -horizontalMove,
-                _ => -verticalMove,
+            character.intendedMove = (shouldMoveVertical, shouldMoveHorizontal, canMoveVertical, canMoveHorizontal, preferVertical) switch {
+                (true, _, _, _, _) => verticalMove,
+                (_, true, _, _, _) => horizontalMove,
+                (_, _, true, _, true) => verticalMove,
+                (_, _, _, true, _) => horizontalMove,
+                (_, _, _, _, true) => horizontalMove * Sign(URandom.Range(-1, 1)),
+                _ => verticalMove * Sign(URandom.Range(-1, 1)),
             };
         }
     }

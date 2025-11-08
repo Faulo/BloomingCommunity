@@ -131,6 +131,7 @@ namespace BloomingCommunity.Runtime {
             command = args[1] switch {
                 "goto" => new GoToCommand(character, map, args[2]),
                 "say" => new SayCommand(character, text),
+                "plant" => new PlantCommand(character, map, args[2]),
                 _ => default
             };
 
