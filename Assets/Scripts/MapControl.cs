@@ -38,7 +38,7 @@ namespace BloomingCommunity.Runtime {
         public Vector3 GridToWorld(Vector2Int position) => grid.GetCellCenterWorld(position.SwizzleXY());
 
         public bool IsFreeToMove(Vector2Int position) {
-            return ground.GetTile(position.SwizzleXY());
+            return ground.GetTile(position.SwizzleXY()) && IsFreeToSpawn(position);
         }
 
         public bool IsFreeToSpawn(Vector2Int position) {
@@ -70,18 +70,19 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal IEnumerable<Vector2Int> FindPositionsOfType(string type) {
-            switch (type) {
-                case "off":
-                    return special
-                        .GetUsedTiles()
-                        .Where(t => t.Item2 == tiles.off)
-                        .Select(t => t.Item1.SwizzleXY())
-                        .Where(IsFreeToSpawn);
-                case "field":
-                    break;
-            }
-
-            return Enumerable.Empty<Vector2Int>();
+            return type switch {
+                "off" => special
+                    .GetUsedTiles()
+                    .Where(t => t.Item2 == tiles.off)
+                    .Select(t => t.Item1.SwizzleXY())
+                    .Where(IsFreeToSpawn),
+                "field" => ground
+                    .GetUsedTiles()
+                    .Where(t => t.Item2 == tiles.field)
+                    .Select(t => t.Item1.SwizzleXY())
+                    .Where(IsFreeToSpawn),
+                _ => Enumerable.Empty<Vector2Int>(),
+            };
         }
     }
 }

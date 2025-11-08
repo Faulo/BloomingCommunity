@@ -16,4 +16,4 @@ MonoBehaviour:
   tag: Player
   moveDuration: 0.25
   facingDuration: 0.1
-  blockedDuration: 0.2
+  blockedDuration: 0.3

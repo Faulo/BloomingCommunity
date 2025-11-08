@@ -6,5 +6,7 @@ namespace BloomingCommunity.Runtime {
     sealed class TileDatabase : ScriptableObject {
         [SerializeField]
         public TileBase off;
+        [SerializeField]
+        public TileBase field;
     }
 }

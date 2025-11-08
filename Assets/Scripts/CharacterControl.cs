@@ -39,7 +39,7 @@ namespace BloomingCommunity.Runtime {
         public Vector3 position3D { get; private set; }
         public Vector2Int position2D { get; private set; }
 
-        Vector2Int facing = Vector2Int.down;
+        public Vector2Int facing = Vector2Int.down;
 
         readonly Dictionary<Vector2Int, Quaternion> rotations = new() {
             [Vector2Int.up] = Quaternion.identity,
@@ -124,7 +124,7 @@ namespace BloomingCommunity.Runtime {
                 case ECharacterState.Blocked:
                     stateTimer -= deltaTime;
 
-                    position3D = map.GridToWorld(position2D) + (0.5f * Mathf.Sin(stateTimer * Mathf.PI) * (Vector3)facing.SwizzleXY());
+                    position3D = map.GridToWorld(position2D) + (0.1f * Mathf.Sin(stateTimer * Mathf.PI) * (Vector3)facing.SwizzleXY());
 
                     if (stateTimer <= 0) {
                         position3D = map.GridToWorld(position2D);
