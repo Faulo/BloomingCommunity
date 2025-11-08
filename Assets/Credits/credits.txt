@@ -1,0 +1,10 @@
+footsteps
+
+501102__evretro__8-bit-footsteps.wav
+
+8-bit footsteps.wav by EVRetro -- https://freesound.org/s/501102/ -- License: Creative Commons 0
+
+left_foot_stone.wav
+
+left_foot_stone.wav by GlennM -- https://freesound.org/s/386519/ -- License: Attribution 3.0
+right_foot_stone.wav by GlennM -- https://freesound.org/s/386525/ -- License: Attribution 3.0
