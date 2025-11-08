@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{50c55dbf-876c-4b0f-8d84-e9fb23873a41}">
+	<object class="AudioFile" id="{16cd9950-26b8-4de2-b602-ec20742f8af5}">
 		<property name="assetPath">
 			<value>BeepBox-Song.wav</value>
 		</property>
@@ -17,7 +17,7 @@
 			<value>19.199999999999999</value>
 		</property>
 		<relationship name="masterAssetFolder">
-			<destination>{3a4eb3bb-e03c-49b5-b347-4e6545c485cb}</destination>
+			<destination>{4cdcc422-ea3f-4c81-8792-a6b64d176941}</destination>
 		</relationship>
 	</object>
 </objects>
