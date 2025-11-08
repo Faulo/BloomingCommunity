@@ -54,7 +54,7 @@ namespace BloomingCommunity.Runtime {
             var delta = targetPosition - character.position2D;
 
             var verticalMove = Vector2Int.up * Sign(delta.y);
-            var horizontalMove = Vector2Int.up * Sign(delta.y);
+            var horizontalMove = Vector2Int.right * Sign(delta.x);
 
             bool canMoveVertical = map.IsFreeToMove(character.position2D + verticalMove);
             bool canMoveHorizontal = map.IsFreeToMove(character.position2D + horizontalMove);
@@ -63,8 +63,8 @@ namespace BloomingCommunity.Runtime {
             character.intendedMove = (canMoveVertical, canMoveHorizontal, preferVertical) switch {
                 (true, _, true) => verticalMove,
                 (_, true, _) => horizontalMove,
-                (_, _, true) => verticalMove,
-                _ => horizontalMove,
+                (_, _, true) => -horizontalMove,
+                _ => -verticalMove,
             };
         }
     }
