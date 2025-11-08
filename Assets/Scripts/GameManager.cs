@@ -6,34 +6,37 @@ namespace BloomingCommunity.Runtime {
     sealed class GameManager {
 
         readonly GameObject gameObject;
-        readonly WorldState state;
+        readonly MapControl map;
         readonly InputActions input;
         readonly AvatarControl avatar;
 
         [CreateProperty]
         internal bool isPaused;
 
-        public GameManager() {
+        public GameManager(GameAsset game) {
             gameObject = new(nameof(GameManager));
             var runner = gameObject.AddComponent<ObjectRunner>();
             runner.onUpdate += OnUpdate;
             runner.onFixedUpdate += OnFixedUpdate;
 
-            state = ScriptableObject.CreateInstance<WorldState>();
-            state.grid = UObject.FindAnyObjectByType<Grid>();
+            map = new MapControl(UObject.FindAnyObjectByType<Grid>());
 
             input = new InputActions();
             input.Enable();
             input.Player.Pause.performed += _ => isPaused = !isPaused;
 
-            avatar = new(GameObject.FindGameObjectWithTag("Player"), input);
+            var character = map.CreateCharacter(GameObject.FindGameObjectWithTag("Player"), game.avatar);
+
+            avatar = new(character, input);
         }
 
         void OnUpdate(float deltaTime) {
+            map.Update(deltaTime);
         }
 
         void OnFixedUpdate(float deltaTime) {
             avatar.FixedUpdate(deltaTime);
+            map.FixedUpdate(deltaTime);
         }
 
         internal void Quit() {

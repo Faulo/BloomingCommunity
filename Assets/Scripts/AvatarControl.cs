@@ -4,23 +4,31 @@ using UnityEngine.InputSystem;
 
 namespace BloomingCommunity.Runtime {
     sealed class AvatarControl : InputActions.IPlayerActions {
-        readonly GameObject gameObject;
+        readonly CharacterControl character;
 
-        public AvatarControl(GameObject gameObject, InputActions input) {
-            this.gameObject = gameObject;
+        public AvatarControl(CharacterControl character, InputActions input) {
+            this.character = character;
             input.Player.AddCallbacks(this);
         }
 
         public void FixedUpdate(float deltaTime) {
-            gameObject.transform.position += (intendedMove * deltaTime).SwizzleXY();
+            character.intendedMove = intendedMove.magnitude > MOVEMENT_DEADZONE
+                ? intendedMove.SnapToCardinal()
+                : Vector2Int.zero;
         }
 
         Vector2 intendedMove;
 
+        const float MOVEMENT_DEADZONE = 0.5f;
+
         public void OnMove(InputAction.CallbackContext context) {
             intendedMove = context.ReadValue<Vector2>();
         }
-        public void OnFire(InputAction.CallbackContext context) { }
-        public void OnPause(InputAction.CallbackContext context) { }
+        public void OnFire(InputAction.CallbackContext context) {
+
+        }
+        public void OnPause(InputAction.CallbackContext context) {
+
+        }
     }
 }

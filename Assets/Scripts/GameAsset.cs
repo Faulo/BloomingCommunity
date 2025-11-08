@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 namespace BloomingCommunity.Runtime {
     [CreateAssetMenu]
     sealed class GameAsset : ScriptableObject {
+        [SerializeField]
+        public CharacterAsset avatar;
+
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;
         [CreateProperty]
@@ -17,7 +20,7 @@ namespace BloomingCommunity.Runtime {
                 manager.Quit();
             }
 
-            manager = new();
+            manager = new(this);
         }
 
         public void Quit() {
