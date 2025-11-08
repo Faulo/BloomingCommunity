@@ -38,6 +38,7 @@ namespace BloomingCommunity.Runtime {
 
         public Vector3 position3D { get; private set; }
         public Vector2Int position2D { get; private set; }
+        public Vector2Int selectedPosition2D => position2D + facing;
 
         public Vector2Int facing = Vector2Int.down;
 

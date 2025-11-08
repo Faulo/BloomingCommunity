@@ -45,6 +45,10 @@ namespace BloomingCommunity.Runtime {
             return characters.None(c => c.isActive && c.position2D == position);
         }
 
+        public bool IsFreeToPlant(Vector2Int position) {
+            return ground.GetTile(position.SwizzleXY()) == tiles.field;
+        }
+
         public void Update(float deltaTime) {
             foreach (var c in characters) {
                 c.Update(deltaTime);
