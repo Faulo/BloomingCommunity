@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Slothsoft.UnityExtensions;
-using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UObject = UnityEngine.Object;
@@ -16,8 +15,8 @@ namespace BloomingCommunity.Runtime {
         readonly MapControl map;
         readonly UIDocument speech;
 
-        [CreateProperty(ReadOnly = true)]
-        public string speechText { get; private set; }
+        string speechText = string.Empty;
+        string todoText = string.Empty;
 
         public ECharacterState state = ECharacterState.Idle;
 
@@ -35,8 +34,7 @@ namespace BloomingCommunity.Runtime {
             this.map = map;
 
             speech = UObject.Instantiate(speechPrefab, gameObject.transform);
-            speech.rootVisualElement.dataSource = new CharacterViewModel(this);
-            speech.rootVisualElement.AddToClassList(asset.name);
+            speech.rootVisualElement.AddToClassList(asset.tag);
 
             TeleportTo(position3D);
         }
@@ -81,8 +79,10 @@ namespace BloomingCommunity.Runtime {
             [ECharacterState.Moving] = "Walk",
             [ECharacterState.Blocked] = "Walk",
             [ECharacterState.Growing] = "Grow",
-            [ECharacterState.Plant] = "Grow",
+            [ECharacterState.Plant] = "Sow",
         };
+
+        float speechTimer = 0;
 
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
@@ -95,6 +95,27 @@ namespace BloomingCommunity.Runtime {
                 } else {
                     gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
                 }
+
+                if (isSpeaking) {
+                    if (speechText == todoText) {
+                        speechTimer -= deltaTime;
+                        if (speechTimer < 0) {
+                            speechText = todoText = string.Empty;
+                        }
+                    } else {
+                        speechTimer -= deltaTime;
+
+                        if (speechTimer > 0) {
+                            float t = Mathf.Lerp(todoText.Length, 0, speechTimer / asset.letterDuration);
+                            speechText = todoText[..Mathf.RoundToInt(t)];
+                        } else {
+                            speechText = todoText;
+                            speechTimer = asset.speechPause;
+                        }
+                    }
+                }
+
+                speech.rootVisualElement.Q<Label>().text = speechText;
             }
         }
 
@@ -210,8 +231,14 @@ namespace BloomingCommunity.Runtime {
             map.Plant(selectedPosition2D, plant);
         }
 
+        internal bool isSpeaking => !string.IsNullOrEmpty(todoText);
+
         internal void Say(string text) {
-            speechText = text;
+            speechText = string.Empty;
+            todoText = string.IsNullOrEmpty(text)
+                ? string.Empty
+                : text;
+            speechTimer = asset.letterDuration * todoText.Length;
         }
     }
 }

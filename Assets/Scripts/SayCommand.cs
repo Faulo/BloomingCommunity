@@ -3,17 +3,15 @@ namespace BloomingCommunity.Runtime {
         readonly CharacterControl character;
         readonly string text;
 
-        int index = 0;
-
         public SayCommand(CharacterControl character, string text) {
             this.character = character;
             this.text = text;
+
+            character.Say(text);
         }
 
         public bool TryUpdateAndFinish(float deltaTime) {
-            character.Say(text[..index]);
-            index++;
-            return index < text.Length;
+            return !character.isSpeaking;
         }
     }
 }
