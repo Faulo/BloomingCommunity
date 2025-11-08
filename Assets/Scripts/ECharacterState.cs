@@ -4,6 +4,7 @@ namespace BloomingCommunity.Runtime {
         Facing,
         Moving,
         Busy,
-        Blocked
+        Blocked,
+        Growing,
     }
 }

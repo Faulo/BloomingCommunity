@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using MyBox;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
+
+        public Animator animator;
 
         public string name => asset.tag;
 
@@ -18,6 +21,7 @@ namespace BloomingCommunity.Runtime {
             gameObject = UObject.Instantiate(asset.prefab);
             gameObject.tag = asset.tag;
 
+            animator = gameObject.GetComponent<Animator>();
             this.asset = asset;
             this.map = map;
 
@@ -50,10 +54,30 @@ namespace BloomingCommunity.Runtime {
 
         Quaternion rotation3D => rotations[facing];
 
+
+        readonly Dictionary<Vector2Int, string> anim_facing = new() {
+            [Vector2Int.up] = "Up_",
+            [Vector2Int.down] = "Down_",
+            [Vector2Int.left] = "Left_",
+            [Vector2Int.right] = "Right_",
+        };
+
+        readonly Dictionary<ECharacterState, string> anim_state = new() {
+            [ECharacterState.Idle] = "Idle",
+            [ECharacterState.Moving] = "Walk",
+            [ECharacterState.Growing] = "Grow",
+        };
+
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
-            gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
             gameObject.name = $"{asset.tag}: {state}";
+
+            if (animator) {
+                animator.Play(anim_facing[facing] + anim_state[state]);
+                gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
+            } else {
+                gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
+            }
         }
 
         public Vector2Int intendedMove;
