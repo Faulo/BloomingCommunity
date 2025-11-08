@@ -31,10 +31,18 @@ namespace BloomingCommunity.Runtime {
         }
 
         void OnUpdate(float deltaTime) {
+            if (isPaused) {
+                return;
+            }
+
             map.Update(deltaTime);
         }
 
         void OnFixedUpdate(float deltaTime) {
+            if (isPaused) {
+                return;
+            }
+
             avatar.FixedUpdate(deltaTime);
             map.FixedUpdate(deltaTime);
         }
