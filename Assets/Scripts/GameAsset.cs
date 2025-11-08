@@ -16,6 +16,8 @@ namespace BloomingCommunity.Runtime {
         public CommunityAsset community;
         [SerializeField]
         public TileDatabase tiles;
+        [SerializeField]
+        public UIDocument speechPrefab;
 
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;

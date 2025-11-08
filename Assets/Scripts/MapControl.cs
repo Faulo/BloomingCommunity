@@ -4,6 +4,7 @@ using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace BloomingCommunity.Runtime {
     sealed class MapControl {
@@ -13,10 +14,12 @@ namespace BloomingCommunity.Runtime {
         readonly Tilemap special;
 
         readonly TileDatabase tiles;
+        readonly UIDocument speechPrefab;
 
-        public MapControl(Grid grid, TileDatabase tiles) {
+        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab) {
             this.grid = grid;
             this.tiles = tiles;
+            this.speechPrefab = speechPrefab;
 
             var tilemaps = grid.GetComponentsInChildren<Tilemap>();
             ground = tilemaps[0];
@@ -29,8 +32,11 @@ namespace BloomingCommunity.Runtime {
         public readonly List<CharacterControl> characters = new();
 
         public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
-            var character = new CharacterControl(asset, this);
-            characters.Add(character);
+            var character = new CharacterControl(asset, this, speechPrefab);
+            if (addToCharacters) {
+                characters.Add(character);
+            }
+
             return character;
         }
 
@@ -43,6 +49,15 @@ namespace BloomingCommunity.Runtime {
 
         public bool IsFreeToSpawn(Vector2Int position) {
             return characters.None(c => c.isActive && c.position2D == position);
+        }
+
+        public bool IsFreeToPlant(Vector2Int position) {
+            return tiles.IsField(ground.GetTile(position.SwizzleXY()))
+                && !objects.GetTile(position.SwizzleXY());
+        }
+
+        public void Plant(Vector2Int position, string plant) {
+            objects.SetTile(position.SwizzleXY(), tiles.GetPlant(plant));
         }
 
         public void Update(float deltaTime) {
@@ -73,16 +88,31 @@ namespace BloomingCommunity.Runtime {
             return type switch {
                 "off" => special
                     .GetUsedTiles()
-                    .Where(t => t.Item2 == tiles.off)
+                    .Where(t => tiles.IsOff(t.Item2))
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
                 "field" => ground
                     .GetUsedTiles()
-                    .Where(t => t.Item2 == tiles.field)
+                    .Where(t => tiles.IsField(t.Item2))
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
+                _ when TryGetCharacter(type, out var character) => new[] { character.position2D },
+                _ when TryGetPlantsByName(type, out var plantPositions) => plantPositions,
                 _ => Enumerable.Empty<Vector2Int>(),
             };
+        }
+
+        bool TryGetPlantsByName(string name, out IEnumerable<Vector2Int> positions) {
+            if (tiles.TryGetPlant(name, out var tile)) {
+                positions = objects
+                    .GetUsedTiles()
+                    .Where(t => t.Item2 == tile)
+                    .Select(t => t.Item1.SwizzleXY());
+                return true;
+            }
+
+            positions = default;
+            return false;
         }
     }
 }

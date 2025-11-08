@@ -29,9 +29,13 @@ namespace BloomingCommunity.Runtime {
             }
 
             if ((character.position2D + character.facing) == targetPosition) {
-                character.intendedMove = Vector2Int.zero;
-                character.isActive = false;
-                return true;
+                if (character.state == ECharacterState.Idle) {
+                    character.intendedMove = Vector2Int.zero;
+                    character.isActive = false;
+                    return true;
+                }
+
+                return false;
             }
 
             GoToCommand.SetMoveIntention(character, map, targetPosition.Value);

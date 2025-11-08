@@ -1,25 +1,42 @@
 using System.Collections.Generic;
 using Slothsoft.UnityExtensions;
+using Unity.Properties;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
-
         public string name => asset.tag;
 
         readonly GameObject gameObject;
+        readonly Animator animator;
+        readonly FMODEventPlayer audio;
         readonly CharacterAsset asset;
         readonly MapControl map;
+        readonly UIDocument speech;
 
-        ECharacterState state = ECharacterState.Idle;
+        [CreateProperty(ReadOnly = true)]
+        public string speechText { get; private set; }
 
-        public CharacterControl(CharacterAsset asset, MapControl map) {
+        public ECharacterState state = ECharacterState.Idle;
+
+        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab) {
             gameObject = UObject.Instantiate(asset.prefab);
             gameObject.tag = asset.tag;
 
+            if (gameObject.TryGetComponent(out animator)) {
+                animator.runtimeAnimatorController = asset.animator;
+            }
+
+            audio = gameObject.AddComponent<FMODEventPlayer>();
+
             this.asset = asset;
             this.map = map;
+
+            speech = UObject.Instantiate(speechPrefab, gameObject.transform);
+            speech.rootVisualElement.dataSource = new CharacterViewModel(this);
+            speech.rootVisualElement.AddToClassList(asset.name);
 
             TeleportTo(position3D);
         }
@@ -38,10 +55,11 @@ namespace BloomingCommunity.Runtime {
 
         public Vector3 position3D { get; private set; }
         public Vector2Int position2D { get; private set; }
+        public Vector2Int selectedPosition2D => position2D + facing;
 
         public Vector2Int facing = Vector2Int.down;
 
-        readonly Dictionary<Vector2Int, Quaternion> rotations = new() {
+        static readonly Dictionary<Vector2Int, Quaternion> rotations = new() {
             [Vector2Int.up] = Quaternion.identity,
             [Vector2Int.down] = Quaternion.Euler(0, 0, 180),
             [Vector2Int.left] = Quaternion.Euler(0, 0, 90),
@@ -50,10 +68,34 @@ namespace BloomingCommunity.Runtime {
 
         Quaternion rotation3D => rotations[facing];
 
+        static readonly Dictionary<Vector2Int, string> anim_facing = new() {
+            [Vector2Int.up] = "Up_",
+            [Vector2Int.down] = "Down_",
+            [Vector2Int.left] = "Left_",
+            [Vector2Int.right] = "Right_",
+        };
+
+        static readonly Dictionary<ECharacterState, string> anim_state = new() {
+            [ECharacterState.Idle] = "Idle",
+            [ECharacterState.Facing] = "Idle",
+            [ECharacterState.Moving] = "Walk",
+            [ECharacterState.Blocked] = "Walk",
+            [ECharacterState.Growing] = "Grow",
+            [ECharacterState.Plant] = "Grow",
+        };
+
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
-            gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
             gameObject.name = $"{asset.tag}: {state}";
+
+            if (isActive) {
+                if (animator) {
+                    animator.Play(anim_facing[facing] + anim_state[state]);
+                    gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
+                } else {
+                    gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
+                }
+            }
         }
 
         public Vector2Int intendedMove;
@@ -67,19 +109,15 @@ namespace BloomingCommunity.Runtime {
                     if (intendedMove != Vector2Int.zero) {
                         if (facing == intendedMove) {
                             if (map.IsFreeToMove(position2D + intendedMove)) {
-                                state = ECharacterState.Moving;
-                                statePosition2D = position2D;
-                                position2D += intendedMove;
-                                stateTimer = asset.moveDuration;
+                                StartMoving();
                             } else {
-                                state = ECharacterState.Blocked;
-                                stateTimer = asset.blockedDuration;
+                                Bonk();
                             }
                         } else {
-                            state = ECharacterState.Facing;
-                            facing = intendedMove;
-                            stateTimer = asset.facingDuration;
+                            Face();
                         }
+
+                        intendedMove = Vector2Int.zero;
 
                         if (deltaTime > 0) {
                             FixedUpdate(deltaTime);
@@ -113,6 +151,7 @@ namespace BloomingCommunity.Runtime {
 
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
+                        audio.StopPlaying();
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
                         }
@@ -137,7 +176,42 @@ namespace BloomingCommunity.Runtime {
                     }
 
                     break;
+                case ECharacterState.Plant:
+                    state = ECharacterState.Idle;
+                    break;
             }
+        }
+
+        void Face() {
+            state = ECharacterState.Facing;
+            facing = intendedMove;
+            stateTimer = asset.facingDuration;
+        }
+
+        void StartMoving() {
+            state = ECharacterState.Moving;
+            statePosition2D = position2D;
+            position2D += intendedMove;
+            stateTimer = asset.moveDuration;
+
+            if (!asset.stepEvent.IsNull) {
+                audio.PlayRepeatedly(asset.stepEvent, asset.stepInterval);
+            }
+        }
+
+        void Bonk() {
+            asset.bonkEvent.PlayOnce();
+            state = ECharacterState.Blocked;
+            stateTimer = asset.blockedDuration;
+        }
+
+        internal void Plant(MapControl map, string plant) {
+            state = ECharacterState.Plant;
+            map.Plant(selectedPosition2D, plant);
+        }
+
+        internal void Say(string text) {
+            speechText = text;
         }
     }
 }

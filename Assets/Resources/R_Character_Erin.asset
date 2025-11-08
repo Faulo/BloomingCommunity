@@ -12,8 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07a148b83644b546928f38822192232, type: 3}
   m_Name: R_Character_Erin
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
-  prefab: {fileID: 7112399866465388028, guid: b0ed628394af15043b8e99c6bc9298a9, type: 3}
+  prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
+  animator: {fileID: 6227694144673515183, guid: 00553bf84541c514690b8d45c201b074, type: 3}
   tag: Erin
-  moveDuration: 0.25
+  moveDuration: 0.2
   facingDuration: 0.1
   blockedDuration: 0.2
+  stepEvent:
+    Guid:
+      Data1: -1553437905
+      Data2: 1320518985
+      Data3: -2016731207
+      Data4: 862170643
+    Path: event:/foot_01
+  stepInterval: 0.2
+  bonkEvent:
+    Guid:
+      Data1: -823523112
+      Data2: 1179828656
+      Data3: -1351461745
+      Data4: -1634113588
+    Path: event:/bonk
+  growEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
