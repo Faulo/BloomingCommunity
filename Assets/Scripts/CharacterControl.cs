@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using MyBox;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UObject = UnityEngine.Object;
@@ -55,7 +54,6 @@ namespace BloomingCommunity.Runtime {
 
         Quaternion rotation3D => rotations[facing];
 
-
         readonly Dictionary<Vector2Int, string> anim_facing = new() {
             [Vector2Int.up] = "Up_",
             [Vector2Int.down] = "Down_",
@@ -65,8 +63,11 @@ namespace BloomingCommunity.Runtime {
 
         readonly Dictionary<ECharacterState, string> anim_state = new() {
             [ECharacterState.Idle] = "Idle",
+            [ECharacterState.Facing] = "Idle",
             [ECharacterState.Moving] = "Walk",
+            [ECharacterState.Blocked] = "Walk",
             [ECharacterState.Growing] = "Grow",
+            [ECharacterState.Plant] = "Grow",
         };
 
         public void Update(float deltaTime) {
