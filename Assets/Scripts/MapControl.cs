@@ -4,6 +4,7 @@ using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace BloomingCommunity.Runtime {
     sealed class MapControl {
@@ -13,10 +14,12 @@ namespace BloomingCommunity.Runtime {
         readonly Tilemap special;
 
         readonly TileDatabase tiles;
+        readonly UIDocument speechPrefab;
 
-        public MapControl(Grid grid, TileDatabase tiles) {
+        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab) {
             this.grid = grid;
             this.tiles = tiles;
+            this.speechPrefab = speechPrefab;
 
             var tilemaps = grid.GetComponentsInChildren<Tilemap>();
             ground = tilemaps[0];
@@ -29,8 +32,11 @@ namespace BloomingCommunity.Runtime {
         public readonly List<CharacterControl> characters = new();
 
         public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
-            var character = new CharacterControl(asset, this);
-            characters.Add(character);
+            var character = new CharacterControl(asset, this, speechPrefab);
+            if (addToCharacters) {
+                characters.Add(character);
+            }
+
             return character;
         }
 

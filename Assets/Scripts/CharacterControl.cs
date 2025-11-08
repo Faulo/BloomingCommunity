@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Slothsoft.UnityExtensions;
+using Unity.Properties;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
@@ -12,10 +14,14 @@ namespace BloomingCommunity.Runtime {
         readonly FMODEventPlayer audio;
         readonly CharacterAsset asset;
         readonly MapControl map;
+        readonly UIDocument speech;
+
+        [CreateProperty(ReadOnly = true)]
+        public string speechText { get; private set; }
 
         public ECharacterState state = ECharacterState.Idle;
 
-        public CharacterControl(CharacterAsset asset, MapControl map) {
+        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab) {
             gameObject = UObject.Instantiate(asset.prefab);
             gameObject.tag = asset.tag;
 
@@ -27,6 +33,10 @@ namespace BloomingCommunity.Runtime {
 
             this.asset = asset;
             this.map = map;
+
+            speech = UObject.Instantiate(speechPrefab, gameObject.transform);
+            speech.rootVisualElement.dataSource = new CharacterViewModel(this);
+            speech.rootVisualElement.AddToClassList(asset.name);
 
             TeleportTo(position3D);
         }
@@ -198,6 +208,10 @@ namespace BloomingCommunity.Runtime {
         internal void Plant(MapControl map, string plant) {
             state = ECharacterState.Plant;
             map.Plant(selectedPosition2D, plant);
+        }
+
+        internal void Say(string text) {
+            speechText = text;
         }
     }
 }
