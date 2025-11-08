@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07a148b83644b546928f38822192232, type: 3}
   m_Name: R_Character_Avatar
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
-  prefab: {fileID: 7112399866465388028, guid: b0ed628394af15043b8e99c6bc9298a9, type: 3}
+  prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
   tag: Player
   moveDuration: 0.25
   facingDuration: 0.1
