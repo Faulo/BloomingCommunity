@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: R_Character_Barbara
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
   prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
-  animator: {fileID: 6227694144673515183, guid: 7ebe544012279e64ab8dafa7dd21d7d0, type: 3}
+  animator: {fileID: 6227694144673515183, guid: 8ecba24686f2f6f4c9d6c8c095d4349d, type: 3}
   tag: Barbara
   letterDuration: 0.1
   speechPause: 3
