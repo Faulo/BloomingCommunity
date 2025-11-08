@@ -53,5 +53,5 @@ MonoBehaviour:
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
   m_PivotReferenceSize: 0
-  m_Pivot: 1
+  m_Pivot: 6
   m_WorldSpaceCollider: {fileID: 0}

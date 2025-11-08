@@ -15,6 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
   animator: {fileID: 6227694144673515183, guid: 7c006345c06b0904c8191c5245e2ccbc, type: 3}
   tag: Erin
+  letterDuration: 0.1
+  speechPause: 3
   moveDuration: 0.2
   facingDuration: 0.1
   blockedDuration: 0.2

@@ -106,7 +106,7 @@ namespace BloomingCommunity.Runtime {
                         speechTimer -= deltaTime;
 
                         if (speechTimer > 0) {
-                            float t = Mathf.Lerp(todoText.Length, 0, speechTimer / asset.letterDuration);
+                            float t = Mathf.Lerp(todoText.Length, 0, speechTimer / (todoText.Length * asset.letterDuration));
                             speechText = todoText[..Mathf.RoundToInt(t)];
                         } else {
                             speechText = todoText;
@@ -116,6 +116,9 @@ namespace BloomingCommunity.Runtime {
                 }
 
                 speech.rootVisualElement.Q<Label>().text = speechText;
+                speech.rootVisualElement.style.display = isSpeaking
+                    ? DisplayStyle.Flex
+                    : DisplayStyle.None;
             }
         }
 
