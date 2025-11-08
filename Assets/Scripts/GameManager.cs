@@ -20,7 +20,7 @@ namespace BloomingCommunity.Runtime {
             runner.onUpdate += OnUpdate;
             runner.onFixedUpdate += OnFixedUpdate;
 
-            map = new MapControl(UObject.FindAnyObjectByType<Grid>());
+            map = new MapControl(UObject.FindAnyObjectByType<Grid>(), game.tiles);
 
             input = new InputActions();
             input.Enable();

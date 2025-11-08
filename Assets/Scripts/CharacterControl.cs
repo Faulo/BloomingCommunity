@@ -6,6 +6,8 @@ using UObject = UnityEngine.Object;
 namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
 
+        public string name => asset.tag;
+
         readonly GameObject gameObject;
         readonly CharacterAsset asset;
         readonly MapControl map;
@@ -24,6 +26,11 @@ namespace BloomingCommunity.Runtime {
 
         public void TeleportTo(Vector3 position) {
             position2D = map.WorldToGrid(position);
+            position3D = map.GridToWorld(position2D);
+        }
+
+        public void TeleportTo(Vector2Int position) {
+            position2D = position;
             position3D = map.GridToWorld(position2D);
         }
 
@@ -46,7 +53,7 @@ namespace BloomingCommunity.Runtime {
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
             gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
-            gameObject.name = state.ToString();
+            gameObject.name = $"{asset.tag}: {state}";
         }
 
         public Vector2Int intendedMove;

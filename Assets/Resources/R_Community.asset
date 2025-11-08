@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CommunityAsset
   minWaitForTravellers: 1
   maxWaitForTravellers: 3
+  cutscenes:
+  - {fileID: 4900000, guid: f4be410fce0d364439b00919f1bbc93c, type: 3}

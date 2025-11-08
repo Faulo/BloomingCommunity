@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using Ink.Runtime;
+using Slothsoft.UnityExtensions;
 using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
@@ -6,9 +10,20 @@ namespace BloomingCommunity.Runtime {
         readonly MapControl map;
         ECommunityState state;
 
+        readonly List<Story> stories = new();
+        readonly List<ICommand> commands = new();
+
+        Story currentStory;
+
         public CommunityControl(CommunityAsset asset, MapControl map) {
             this.asset = asset;
             this.map = map;
+
+            foreach (var cutscene in asset.cutscenes) {
+                stories.Add(new Story(cutscene.text));
+            }
+
+            WaitForTravellers();
         }
 
         float stateTimer;
@@ -18,9 +33,7 @@ namespace BloomingCommunity.Runtime {
                 case ECommunityState.None:
                     stateTimer -= deltaTime;
                     if (stateTimer <= 0) {
-                        state = ECommunityState.Travellers;
-
-                        SpawnTravellers();
+                        state = ECommunityState.StartCutscene;
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -30,16 +43,79 @@ namespace BloomingCommunity.Runtime {
                     }
 
                     break;
-                case ECommunityState.Travellers:
-                    stateTimer = Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
-                    state = ECommunityState.None;
+                case ECommunityState.StartCutscene:
+                    if (TryStartCutscene()) {
+                        state = ECommunityState.PlayCutscene;
+                    } else {
+                        WaitForTravellers();
+                    }
+
+                    break;
+                case ECommunityState.PlayCutscene:
+                    if (commands.Count > 0) {
+                        for (int i = 0; i < commands.Count; i++) {
+                            if (commands[i].TryUpdateAndFinish(deltaTime)) {
+                                commands.RemoveAt(i);
+                                i--;
+                            }
+                        }
+
+                        return;
+                    }
+
+                    if (currentStory.canContinue) {
+                        string text = currentStory.Continue();
+                        foreach (string tag in currentStory.currentTags) {
+                            if (TryParse(tag, text, out var command)) {
+                                commands.Add(command);
+                            }
+                        }
+                    } else {
+                        stories.Remove(currentStory);
+
+                        WaitForTravellers();
+                    }
 
                     break;
             }
         }
 
-        void SpawnTravellers() {
-            Debug.Log("spawned travllers");
+        void WaitForTravellers() {
+            stateTimer = Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
+            state = ECommunityState.None;
+        }
+
+        bool TryStartCutscene() {
+            for (int i = 0; i < stories.Count; i++) {
+                stories[i].ChoosePathString("requirements");
+            }
+
+            currentStory = stories.Where(s => s.canContinue).DefaultIfEmpty().RandomElement();
+            return currentStory is not null;
+        }
+
+        internal bool TryParse(string tag, string text, out ICommand command) {
+            command = default;
+
+            string[] args = tag.ToLower().Split(' ');
+
+            if (!map.TryGetCharacter(args[0], out var character)) {
+                Debug.LogWarning($"Unknown character '{args[0]}'!");
+                return false;
+            }
+
+            command = args[1] switch {
+                "goto" => new GoToCommand(character, map, args[2]),
+                "say" => new SayCommand(character, text),
+                _ => default
+            };
+
+            if (command is null) {
+                Debug.LogWarning($"Unknown character command '{args[1]}' (Full command: '{tag}')!");
+                return false;
+            }
+
+            return true;
         }
     }
 }

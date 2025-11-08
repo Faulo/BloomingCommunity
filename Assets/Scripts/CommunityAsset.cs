@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
@@ -7,5 +8,9 @@ namespace BloomingCommunity.Runtime {
         public float minWaitForTravellers = 1;
         [SerializeField]
         public float maxWaitForTravellers = 3;
+
+        [Space]
+        [SerializeField]
+        public TextAsset[] cutscenes = Array.Empty<TextAsset>();
     }
 }
