@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{795cc11d-5d84-461a-a67b-199cb4341c05}">
+		<property name="assetPath">
+			<value>664624__squirrel_404__plop-bonk-sound.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.20752834467120182</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{4cdcc422-ea3f-4c81-8792-a6b64d176941}</destination>
+		</relationship>
+	</object>
+</objects>
