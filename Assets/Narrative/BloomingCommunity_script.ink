@@ -14,20 +14,20 @@ On this bare patch of land I shall make my garden.
 WHAT!! is THAT!
 
 # SPEAKER: M1
-Erin, stop pulling on my arm! 
-I'm carrying groceries! //cocoa puffs, snacks, etc
+Erin, stop pulling on my arm. 
+That's where I'm carrying our groceries, aka all your precrious snacks young lady! //cocoa puffs, snacks, etc
 
 # SPEAKER: Erin
 Mom look! There's a little garden!
 
 # SPEAKER: M1
-And the little garden will still be there tomorrow. I need to catch a couple of hours of sleep before my night shift Erin. 
-Come on.
+Cute. But, the little garden will still be there tomorrow. 
+I need to catch a couple of Zs before my night shift Hon. Come on.
 
 # SPEAKER: Erin
 Awww :c //add then I dont get to see you sentiment
-But then I have nothing to dooooo :( 
-it's booorriiinngggg
+But then I have nothing to dooooo
+it's booorriiinngggg.
 
 # SPEAKER: M1
 Kid, there ain't two of me. 
@@ -44,7 +44,26 @@ Ruth:
 ...they made a new patch of dirt. Right next to my house. Lovely.
 What do I even pay property taxes for when the municipality uses it on ugly, useless nonsence like this.
 They should have put down some flowers immedeatly, this will be overrun with weeds and god knows what before the week is up.
-//option for pc to compell ruth, kid(?) or barb
+#ACTION: r_walk_off
+#ACTION: r_walk_field
+...
+Bertie had left some tulip bulbs in the window boxes.
+#ACTION: r_plant_tulip
+
+
+#ACTION: e_walk_field
+#SPEAKER: Erin
+I can leave the house a little. I'm 8! That's almost 10!
+//plant dandelion
+There c: puffy flower. Awesome.
+
+//day end
+
+//day 2
+
+
+
+
 
 
 
