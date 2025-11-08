@@ -1,3 +1,4 @@
+using System;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +8,12 @@ namespace BloomingCommunity.Runtime {
     sealed class GameAsset : ScriptableObject {
         [SerializeField]
         public CharacterAsset avatar;
+        [SerializeField]
+        public CharacterAsset[] humans = Array.Empty<CharacterAsset>();
+
+        [Space]
+        [SerializeField]
+        public CommunityAsset community;
 
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;

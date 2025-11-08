@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
+using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
@@ -11,8 +12,10 @@ namespace BloomingCommunity.Runtime {
 
         ECharacterState state = ECharacterState.Idle;
 
-        public CharacterControl(GameObject gameObject, CharacterAsset asset, MapControl map) {
-            this.gameObject = gameObject;
+        public CharacterControl(CharacterAsset asset, MapControl map) {
+            gameObject = UObject.Instantiate(asset.prefab);
+            gameObject.tag = asset.tag;
+
             this.asset = asset;
             this.map = map;
 
@@ -23,6 +26,8 @@ namespace BloomingCommunity.Runtime {
             position2D = map.WorldToGrid(position);
             position3D = map.GridToWorld(position2D);
         }
+
+        public bool isActive = false;
 
         public Vector3 position3D { get; private set; }
         public Vector2Int position2D { get; private set; }
@@ -39,6 +44,7 @@ namespace BloomingCommunity.Runtime {
         Quaternion rotation3D => rotations[facing];
 
         public void Update(float deltaTime) {
+            gameObject.SetActive(isActive);
             gameObject.transform.SetPositionAndRotation(position3D, rotation3D);
             gameObject.name = state.ToString();
         }
@@ -67,15 +73,25 @@ namespace BloomingCommunity.Runtime {
                             facing = intendedMove;
                             stateTimer = asset.facingDuration;
                         }
+
+                        if (deltaTime > 0) {
+                            FixedUpdate(deltaTime);
+                        }
+
+                        return;
                     }
 
                     break;
                 case ECharacterState.Facing:
                     stateTimer -= deltaTime;
 
-                    if (stateTimer < 0) {
+                    if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
-                        goto case ECharacterState.Idle;
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+
+                        return;
                     }
 
                     break;
@@ -88,9 +104,13 @@ namespace BloomingCommunity.Runtime {
                         ? Vector3.Lerp(targetPosition, previousPosition, stateTimer / asset.moveDuration)
                         : targetPosition;
 
-                    if (stateTimer < 0) {
+                    if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
-                        goto case ECharacterState.Idle;
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+
+                        return;
                     }
 
                     break;
@@ -99,10 +119,14 @@ namespace BloomingCommunity.Runtime {
 
                     position3D = map.GridToWorld(position2D) + (0.5f * Mathf.Sin(stateTimer * Mathf.PI) * (Vector3)facing.SwizzleXY());
 
-                    if (stateTimer < 0) {
+                    if (stateTimer <= 0) {
                         position3D = map.GridToWorld(position2D);
                         state = ECharacterState.Idle;
-                        goto case ECharacterState.Idle;
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+
+                        return;
                     }
 
                     break;

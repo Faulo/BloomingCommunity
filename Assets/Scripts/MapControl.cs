@@ -18,10 +18,8 @@ namespace BloomingCommunity.Runtime {
 
         public readonly List<CharacterControl> characters = new();
 
-        public CharacterControl CreateCharacter(GameObject gameObject, CharacterAsset asset) {
-            gameObject.transform.position = grid.WorldToCell(gameObject.transform.position);
-
-            var character = new CharacterControl(gameObject, asset, this);
+        public CharacterControl CreateCharacter(CharacterAsset asset) {
+            var character = new CharacterControl(asset, this);
             characters.Add(character);
             return character;
         }

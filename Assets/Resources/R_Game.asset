@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: R_Game
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.GameAsset
   avatar: {fileID: 11400000, guid: e83bfdba1fe21174999d50256adad408, type: 2}
+  humans:
+  - {fileID: 11400000, guid: 2d6e54b57c68ae04a89bf234a93a04bc, type: 2}
+  community: {fileID: 11400000, guid: 29a24a319e1a1e14daca6e9b462fa159, type: 2}

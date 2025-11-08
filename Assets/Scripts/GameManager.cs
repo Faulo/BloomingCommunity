@@ -9,6 +9,7 @@ namespace BloomingCommunity.Runtime {
         readonly MapControl map;
         readonly InputActions input;
         readonly AvatarControl avatar;
+        readonly CommunityControl community;
 
         [CreateProperty]
         internal bool isPaused;
@@ -25,9 +26,17 @@ namespace BloomingCommunity.Runtime {
             input.Enable();
             input.Player.Pause.performed += _ => isPaused = !isPaused;
 
-            var character = map.CreateCharacter(GameObject.FindGameObjectWithTag("Player"), game.avatar);
+            var character = map.CreateCharacter(game.avatar);
+
+            character.isActive = true;
 
             avatar = new(character, input);
+
+            foreach (var asset in game.humans) {
+                map.CreateCharacter(asset);
+            }
+
+            community = new(game.community, map);
         }
 
         void OnUpdate(float deltaTime) {
@@ -45,6 +54,7 @@ namespace BloomingCommunity.Runtime {
 
             avatar.FixedUpdate(deltaTime);
             map.FixedUpdate(deltaTime);
+            community.FixedUpdate(deltaTime);
         }
 
         internal void Quit() {
