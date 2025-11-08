@@ -17,3 +17,25 @@ MonoBehaviour:
   moveDuration: 0.3
   facingDuration: 0.1
   blockedDuration: 0.2
+  stepEvent:
+    Guid:
+      Data1: -1553437905
+      Data2: 1320518985
+      Data3: -2016731207
+      Data4: 862170643
+    Path: event:/foot_01
+  stepInterval: 0.2
+  bonkEvent:
+    Guid:
+      Data1: -823523112
+      Data2: 1179828656
+      Data3: -1351461745
+      Data4: -1634113588
+    Path: event:/bonk
+  growEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

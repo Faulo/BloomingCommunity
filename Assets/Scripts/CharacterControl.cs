@@ -5,12 +5,11 @@ using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
-
-        public Animator animator;
-
         public string name => asset.tag;
 
         readonly GameObject gameObject;
+        readonly Animator animator;
+        readonly FMODEventPlayer audio;
         readonly CharacterAsset asset;
         readonly MapControl map;
 
@@ -21,6 +20,8 @@ namespace BloomingCommunity.Runtime {
             gameObject.tag = asset.tag;
 
             animator = gameObject.GetComponent<Animator>();
+            audio = gameObject.AddComponent<FMODEventPlayer>();
+
             this.asset = asset;
             this.map = map;
 
@@ -45,7 +46,7 @@ namespace BloomingCommunity.Runtime {
 
         public Vector2Int facing = Vector2Int.down;
 
-        readonly Dictionary<Vector2Int, Quaternion> rotations = new() {
+        static readonly Dictionary<Vector2Int, Quaternion> rotations = new() {
             [Vector2Int.up] = Quaternion.identity,
             [Vector2Int.down] = Quaternion.Euler(0, 0, 180),
             [Vector2Int.left] = Quaternion.Euler(0, 0, 90),
@@ -54,14 +55,14 @@ namespace BloomingCommunity.Runtime {
 
         Quaternion rotation3D => rotations[facing];
 
-        readonly Dictionary<Vector2Int, string> anim_facing = new() {
+        static readonly Dictionary<Vector2Int, string> anim_facing = new() {
             [Vector2Int.up] = "Up_",
             [Vector2Int.down] = "Down_",
             [Vector2Int.left] = "Left_",
             [Vector2Int.right] = "Right_",
         };
 
-        readonly Dictionary<ECharacterState, string> anim_state = new() {
+        static readonly Dictionary<ECharacterState, string> anim_state = new() {
             [ECharacterState.Idle] = "Idle",
             [ECharacterState.Facing] = "Idle",
             [ECharacterState.Moving] = "Walk",
@@ -93,18 +94,12 @@ namespace BloomingCommunity.Runtime {
                     if (intendedMove != Vector2Int.zero) {
                         if (facing == intendedMove) {
                             if (map.IsFreeToMove(position2D + intendedMove)) {
-                                state = ECharacterState.Moving;
-                                statePosition2D = position2D;
-                                position2D += intendedMove;
-                                stateTimer = asset.moveDuration;
+                                StartMoving();
                             } else {
-                                state = ECharacterState.Blocked;
-                                stateTimer = asset.blockedDuration;
+                                Bonk();
                             }
                         } else {
-                            state = ECharacterState.Facing;
-                            facing = intendedMove;
-                            stateTimer = asset.facingDuration;
+                            Face();
                         }
 
                         intendedMove = Vector2Int.zero;
@@ -141,6 +136,7 @@ namespace BloomingCommunity.Runtime {
 
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
+                        audio.StopPlaying();
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
                         }
@@ -169,6 +165,29 @@ namespace BloomingCommunity.Runtime {
                     state = ECharacterState.Idle;
                     break;
             }
+        }
+
+        void Face() {
+            state = ECharacterState.Facing;
+            facing = intendedMove;
+            stateTimer = asset.facingDuration;
+        }
+
+        void StartMoving() {
+            state = ECharacterState.Moving;
+            statePosition2D = position2D;
+            position2D += intendedMove;
+            stateTimer = asset.moveDuration;
+
+            if (!asset.stepEvent.IsNull) {
+                audio.PlayRepeatedly(asset.stepEvent, asset.stepInterval);
+            }
+        }
+
+        void Bonk() {
+            asset.bonkEvent.PlayOnce();
+            state = ECharacterState.Blocked;
+            stateTimer = asset.blockedDuration;
         }
 
         internal void Plant(MapControl map, string plant) {
