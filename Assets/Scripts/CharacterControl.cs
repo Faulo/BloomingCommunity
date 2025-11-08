@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Slothsoft.UnityExtensions;
 using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
@@ -96,7 +97,10 @@ namespace BloomingCommunity.Runtime {
                 case ECharacterState.Blocked:
                     stateTimer -= deltaTime;
 
+                    position3D = map.GridToWorld(position2D) + (0.5f * Mathf.Sin(stateTimer * Mathf.PI) * (Vector3)facing.SwizzleXY());
+
                     if (stateTimer < 0) {
+                        position3D = map.GridToWorld(position2D);
                         state = ECharacterState.Idle;
                         goto case ECharacterState.Idle;
                     }
