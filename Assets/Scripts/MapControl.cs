@@ -46,7 +46,12 @@ namespace BloomingCommunity.Runtime {
         }
 
         public bool IsFreeToPlant(Vector2Int position) {
-            return ground.GetTile(position.SwizzleXY()) == tiles.field;
+            return tiles.IsField(ground.GetTile(position.SwizzleXY()))
+                && !objects.GetTile(position.SwizzleXY());
+        }
+
+        public void Plant(Vector2Int position, string plant) {
+            objects.SetTile(position.SwizzleXY(), tiles.GetPlant(plant));
         }
 
         public void Update(float deltaTime) {
@@ -77,12 +82,12 @@ namespace BloomingCommunity.Runtime {
             return type switch {
                 "off" => special
                     .GetUsedTiles()
-                    .Where(t => t.Item2 == tiles.off)
+                    .Where(t => tiles.IsOff(t.Item2))
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
                 "field" => ground
                     .GetUsedTiles()
-                    .Where(t => t.Item2 == tiles.field)
+                    .Where(t => tiles.IsField(t.Item2))
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
                 _ => Enumerable.Empty<Vector2Int>(),

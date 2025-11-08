@@ -40,7 +40,7 @@ namespace BloomingCommunity.Runtime {
 
             if ((character.position2D + character.facing) == targetPosition) {
                 character.intendedMove = Vector2Int.zero;
-                return true;
+                return character.state == ECharacterState.Idle;
             }
 
             SetMoveIntention(character, map, targetPosition.Value);

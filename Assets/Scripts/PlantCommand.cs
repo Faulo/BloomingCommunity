@@ -13,12 +13,13 @@ namespace BloomingCommunity.Runtime {
         }
 
         public bool TryUpdateAndFinish(float deltaTime) {
-            if (map.IsFreeToPlant(character.selectedPosition2D)) {
+            if (map.IsFreeToPlant(character.selectedPosition2D) && character.state == ECharacterState.Idle) {
                 Debug.Log($"{character.name}: {plant}");
-                return true;
-            } else {
-                return true;
+                character.state = ECharacterState.Plant;
+                map.Plant(character.selectedPosition2D, plant);
             }
+
+            return character.state == ECharacterState.Idle;
         }
     }
 }
