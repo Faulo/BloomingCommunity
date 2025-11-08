@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
   prefab: {fileID: 7112399866465388028, guid: b0ed628394af15043b8e99c6bc9298a9, type: 3}
   tag: Barbara
-  moveDuration: 0.25
+  moveDuration: 0.3
   facingDuration: 0.1
   blockedDuration: 0.2

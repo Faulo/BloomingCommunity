@@ -16,6 +16,7 @@ namespace BloomingCommunity.Runtime {
         [SerializeField]
         SerializableKeyValuePairs<string, TileBase> plants = new();
 
-        internal TileBase GetPlant(string plant) => plants[plant];
+        internal TileBase GetPlant(string name) => plants[name];
+        internal bool TryGetPlant(string name, out TileBase tile) => plants.TryGetValue(name, out tile);
     }
 }

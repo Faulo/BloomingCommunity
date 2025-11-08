@@ -90,8 +90,23 @@ namespace BloomingCommunity.Runtime {
                     .Where(t => tiles.IsField(t.Item2))
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
+                _ when TryGetCharacter(type, out var character) => new[] { character.position2D },
+                _ when TryGetPlantsByName(type, out var plantPositions) => plantPositions,
                 _ => Enumerable.Empty<Vector2Int>(),
             };
+        }
+
+        bool TryGetPlantsByName(string name, out IEnumerable<Vector2Int> positions) {
+            if (tiles.TryGetPlant(name, out var tile)) {
+                positions = objects
+                    .GetUsedTiles()
+                    .Where(t => t.Item2 == tile)
+                    .Select(t => t.Item1.SwizzleXY());
+                return true;
+            }
+
+            positions = default;
+            return false;
         }
     }
 }

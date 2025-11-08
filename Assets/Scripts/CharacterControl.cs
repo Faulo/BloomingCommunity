@@ -145,5 +145,10 @@ namespace BloomingCommunity.Runtime {
                     break;
             }
         }
+
+        internal void Plant(MapControl map, string plant) {
+            state = ECharacterState.Plant;
+            map.Plant(selectedPosition2D, plant);
+        }
     }
 }
