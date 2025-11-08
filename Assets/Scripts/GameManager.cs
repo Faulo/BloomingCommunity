@@ -26,14 +26,14 @@ namespace BloomingCommunity.Runtime {
             input.Enable();
             input.Player.Pause.performed += _ => isPaused = !isPaused;
 
-            var character = map.CreateCharacter(game.avatar);
+            var character = map.CreateCharacter(game.avatar, false);
 
             character.isActive = true;
 
             avatar = new(character, input);
 
             foreach (var asset in game.humans) {
-                map.CreateCharacter(asset);
+                map.CreateCharacter(asset, true);
             }
 
             community = new(game.community, map);

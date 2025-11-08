@@ -52,14 +52,7 @@ namespace BloomingCommunity.Runtime {
 
                     break;
                 case ECommunityState.PlayCutscene:
-                    if (commands.Count > 0) {
-                        for (int i = 0; i < commands.Count; i++) {
-                            if (commands[i].TryUpdateAndFinish(deltaTime)) {
-                                commands.RemoveAt(i);
-                                i--;
-                            }
-                        }
-
+                    if (TryProcessCommands(deltaTime)) {
                         return;
                     }
 
@@ -72,12 +65,35 @@ namespace BloomingCommunity.Runtime {
                         }
                     } else {
                         stories.Remove(currentStory);
+                        currentStory = null;
 
-                        WaitForTravellers();
+                        WaitForDespawn();
                     }
 
                     break;
+                case ECommunityState.EndCutscene:
+                    if (TryProcessCommands(deltaTime)) {
+                        return;
+                    }
+
+                    WaitForTravellers();
+                    break;
             }
+        }
+
+        bool TryProcessCommands(float deltaTime) {
+            if (commands.Count > 0) {
+                for (int i = 0; i < commands.Count; i++) {
+                    if (commands[i].TryUpdateAndFinish(deltaTime)) {
+                        commands.RemoveAt(i);
+                        i--;
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         void WaitForTravellers() {
@@ -92,6 +108,14 @@ namespace BloomingCommunity.Runtime {
 
             currentStory = stories.Where(s => s.canContinue).DefaultIfEmpty().RandomElement();
             return currentStory is not null;
+        }
+
+        void WaitForDespawn() {
+            foreach (var character in map.characters.Where(c => c.isActive)) {
+                commands.Add(new DespawnCommand(character, map));
+            }
+
+            state = ECommunityState.EndCutscene;
         }
 
         internal bool TryParse(string tag, string text, out ICommand command) {

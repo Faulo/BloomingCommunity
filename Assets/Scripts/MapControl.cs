@@ -28,7 +28,7 @@ namespace BloomingCommunity.Runtime {
 
         public readonly List<CharacterControl> characters = new();
 
-        public CharacterControl CreateCharacter(CharacterAsset asset) {
+        public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
             var character = new CharacterControl(asset, this);
             characters.Add(character);
             return character;

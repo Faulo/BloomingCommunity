@@ -1,10 +1,10 @@
-using System;
 using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
+using URandom = UnityEngine.Random;
 
 namespace BloomingCommunity.Runtime {
-    sealed class GoToCommand : ICommand {
+    class GoToCommand : ICommand {
         readonly CharacterControl character;
         readonly MapControl map;
         readonly string target;
@@ -43,13 +43,29 @@ namespace BloomingCommunity.Runtime {
                 return true;
             }
 
-            var delta = targetPosition.Value - character.position2D;
-
-            character.intendedMove = Mathf.Abs(delta.y) > Mathf.Abs(delta.x)
-                ? Vector2Int.up * Math.Sign(delta.y)
-                : Vector2Int.right * Math.Sign(delta.x);
+            SetMoveIntention(character, map, targetPosition.Value);
 
             return false;
+        }
+
+        static int Sign(int i) => i < 0 ? -1 : 1;
+
+        internal static void SetMoveIntention(CharacterControl character, MapControl map, Vector2Int targetPosition) {
+            var delta = targetPosition - character.position2D;
+
+            var verticalMove = Vector2Int.up * Sign(delta.y);
+            var horizontalMove = Vector2Int.up * Sign(delta.y);
+
+            bool canMoveVertical = map.IsFreeToMove(character.position2D + verticalMove);
+            bool canMoveHorizontal = map.IsFreeToMove(character.position2D + horizontalMove);
+            bool preferVertical = Mathf.Abs(delta.y * URandom.value) > Mathf.Abs(delta.x * URandom.value);
+
+            character.intendedMove = (canMoveVertical, canMoveHorizontal, preferVertical) switch {
+                (true, _, true) => verticalMove,
+                (_, true, _) => horizontalMove,
+                (_, _, true) => verticalMove,
+                _ => horizontalMove,
+            };
         }
     }
 }
