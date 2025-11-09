@@ -26,6 +26,10 @@ namespace BloomingCommunity.Runtime {
         public float facingDuration = 10;
         [SerializeField]
         public float blockedDuration = 0;
+        [SerializeField]
+        public float growDuration = 1;
+        [SerializeField]
+        public float plantDuration = 1;
 
         [Header("Audio")]
         [SerializeField]

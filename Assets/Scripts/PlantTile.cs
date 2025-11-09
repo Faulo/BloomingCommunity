@@ -12,7 +12,7 @@ namespace BloomingCommunity.Runtime {
         Sprite sprite;
 
         [SerializeField]
-        PlantTile nextStage;
+        internal PlantTile nextStage;
 
         internal bool fullyGrown => !nextStage;
 

@@ -1,7 +1,6 @@
 using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
-    [ExecuteAlways]
     sealed class CameraFitter : MonoBehaviour {
         [SerializeField]
         Camera fittedCamera;
