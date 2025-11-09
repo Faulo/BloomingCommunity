@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b9b832263b2b644b9e80c67cae6c06, type: 3}
   m_Name: R_Tiles
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.TileDatabase
-  off: {fileID: 11400000, guid: b5fc857262541bd47b9330f03a55d798, type: 2}
+  offTiles:
+  - {fileID: 11400000, guid: eb4cf5a44374e9341a78472521674b10, type: 2}
+  - {fileID: 11400000, guid: b5fc857262541bd47b9330f03a55d798, type: 2}
+  - {fileID: 11400000, guid: 61048d4e5da75eb4ebb4b2560b5297ad, type: 2}
+  - {fileID: 11400000, guid: 3c1e52c0c9de8e64bb724cd560697729, type: 2}
   field: {fileID: 11400000, guid: 012a20aa8a501204a9d9a8dd46c68542, type: 2}
+  special:
+    items:
+    - key: north
+      value: {fileID: 11400000, guid: b5fc857262541bd47b9330f03a55d798, type: 2}
+    - key: south
+      value: {fileID: 11400000, guid: 61048d4e5da75eb4ebb4b2560b5297ad, type: 2}
+    - key: west
+      value: {fileID: 11400000, guid: 3c1e52c0c9de8e64bb724cd560697729, type: 2}
+    - key: east
+      value: {fileID: 11400000, guid: eb4cf5a44374e9341a78472521674b10, type: 2}
   plants:
     items:
-    - key: tulip
+    - key: tul
+      value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
+    - key: zuc
+      value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
+    - key: dan
       value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
