@@ -20,7 +20,7 @@ namespace BloomingCommunity.Runtime {
         internal bool TryGetSpecial(string name, out TileBase tile) => special.TryGetValue(name, out tile);
 
         [SerializeField]
-        SerializableKeyValuePairs<string, TileBase> plants = new();
+        internal SerializableKeyValuePairs<string, TileBase> plants = new();
 
         internal TileBase GetPlant(string name) => plants[name];
         internal bool TryGetPlant(string name, out TileBase tile) => plants.TryGetValue(name, out tile);

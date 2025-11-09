@@ -77,6 +77,10 @@ namespace BloomingCommunity.Runtime {
                         button.text = community.storyNames[story];
                         button.userData = story;
 
+                        button.style.color = story.canContinue
+                            ? Color.black
+                            : Color.gray;
+
                         if (!community.stories.Contains(story)) {
                             button.style.opacity = 0.5f;
                         }

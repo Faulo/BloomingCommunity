@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace BloomingCommunity.Runtime {
     class PlantCommand : ICommand {
         readonly CharacterControl character;
@@ -14,7 +12,6 @@ namespace BloomingCommunity.Runtime {
 
         public bool TryUpdateAndFinish(float deltaTime) {
             if (map.IsFreeToPlant(character.selectedPosition2D) && character.state == ECharacterState.Idle) {
-                Debug.Log($"{character.name}: {plant}");
                 character.Plant(map, plant);
             }
 
