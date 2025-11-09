@@ -21,29 +21,23 @@ namespace BloomingCommunity.Runtime {
                 return true;
             }
 
-            if (!targetPosition.HasValue) {
-                if (map.IsPositionsOfType(character.position2D, target) || map.IsPositionsOfType(character.selectedPosition2D, target)) {
-                    character.intendedMove = Vector2Int.zero;
-                    character.isActive = false;
-                    return true;
-                }
-
-                var positions = map.FindPositionsOfType(target).ToList();
-                if (positions.Count == 0) {
-                    return false;
-                }
-
-                targetPosition = positions.RandomElement();
-            }
-
             if (map.IsPositionsOfType(character.position2D, target) || map.IsPositionsOfType(character.selectedPosition2D, target)) {
-                if (character.state is ECharacterState.Idle or ECharacterState.Blocked or ECharacterState.Facing) {
+                if (character.state is ECharacterState.Idle or ECharacterState.Blocked) {
                     character.intendedMove = Vector2Int.zero;
                     character.isActive = false;
                     return true;
                 }
 
                 return false;
+            }
+
+            if (!targetPosition.HasValue) {
+                var positions = map.FindPositionsOfType(target).ToList();
+                if (positions.Count == 0) {
+                    return false;
+                }
+
+                targetPosition = positions.RandomElement();
             }
 
             GoToCommand.SetMoveIntention(character, map, targetPosition.Value);
