@@ -26,7 +26,21 @@ namespace BloomingCommunity.Runtime {
 
         public IEnumerable<string> plantNames => plants.Select(t => t.id).Distinct();
 
-        public TileBase GetPlant(string name) => plants.FirstOrDefault(t => t.id == name);
+        public TileBase GetPlant(string name) {
+            if (name.Contains('_')) {
+                string[] args = name.Split('_');
+                return plants
+                    .Where(t => t.id == args[0])
+                    .FirstOrDefault(t => args[1] switch {
+                        "grown" => t.isFullyGrown,
+                        "dead" => t.isDead,
+                        "seed" => t.isSeed,
+                        _ => throw new NotImplementedException(args[1]),
+                    });
+            } else {
+                return plants.FirstOrDefault(t => t.id == name);
+            }
+        }
 
         public bool TryGetPlant(string name, out TileBase tile) {
             return tile = GetPlant(name);
