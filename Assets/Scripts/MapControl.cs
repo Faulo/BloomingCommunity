@@ -182,5 +182,11 @@ namespace BloomingCommunity.Runtime {
                 objects.SetTile(position.SwizzleXY(), plant);
             }
         }
+
+        internal void RemovePlantAt(Vector2Int position) {
+            if (objects.GetTile(position.SwizzleXY()) is PlantTile) {
+                objects.SetTile(position.SwizzleXY(), default);
+            }
+        }
     }
 }

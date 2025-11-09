@@ -30,6 +30,8 @@ namespace BloomingCommunity.Runtime {
         public float growDuration = 1;
         [SerializeField]
         public float plantDuration = 1;
+        [SerializeField]
+        public float harvestDuration = 1;
 
         [Header("Audio")]
         [SerializeField]
