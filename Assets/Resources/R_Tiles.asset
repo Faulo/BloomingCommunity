@@ -29,10 +29,15 @@ MonoBehaviour:
     - key: east
       value: {fileID: 11400000, guid: eb4cf5a44374e9341a78472521674b10, type: 2}
   plants:
-    items:
-    - key: tul
-      value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
-    - key: zuc
-      value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
-    - key: dan
-      value: {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
+  - {fileID: 11400000, guid: 9bd8d47c476fc4c438504eb24d7970be, type: 2}
+  - {fileID: 11400000, guid: f562d48bfc392e7479191122143fd255, type: 2}
+  - {fileID: 11400000, guid: 37ab3ff884d1a6a4c997ac5b91abfd89, type: 2}
+  - {fileID: 11400000, guid: cca73615ad1198843b5e354b6f402af3, type: 2}
+  - {fileID: 11400000, guid: 2e556cb573ae34d4f9707a7a21a1d133, type: 2}
+  - {fileID: 11400000, guid: 40037c42382935d40b576532fc4df414, type: 2}
+  - {fileID: 11400000, guid: e8a80a0b2a06c904c8be2cf4bb503ee3, type: 2}
+  - {fileID: 11400000, guid: 0e8a7c3274a4b9e4da693bad6cf564af, type: 2}
+  - {fileID: 11400000, guid: 8cc4aa0af76530c44a0dc09e0efb6491, type: 2}
+  - {fileID: 11400000, guid: 111bb1ffc78c47342af1bc4903be0da7, type: 2}
+  - {fileID: 11400000, guid: e60b44055f910c04b94006016dd8bbab, type: 2}
+  - {fileID: 11400000, guid: 46ad341b8cfc92c47a97693106fd62ed, type: 2}

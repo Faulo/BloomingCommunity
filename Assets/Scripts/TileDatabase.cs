@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
@@ -20,9 +22,14 @@ namespace BloomingCommunity.Runtime {
         internal bool TryGetSpecial(string name, out TileBase tile) => special.TryGetValue(name, out tile);
 
         [SerializeField]
-        internal SerializableKeyValuePairs<string, TileBase> plants = new();
+        PlantTile[] plants = Array.Empty<PlantTile>();
 
-        internal TileBase GetPlant(string name) => plants[name];
-        internal bool TryGetPlant(string name, out TileBase tile) => plants.TryGetValue(name, out tile);
+        internal IEnumerable<string> plantNames => plants.Select(t => t.id).Distinct();
+
+        internal TileBase GetPlant(string name) => plants.FirstOrDefault(t => t.id == name);
+
+        internal bool TryGetPlant(string name, out TileBase tile) {
+            return tile = GetPlant(name);
+        }
     }
 }

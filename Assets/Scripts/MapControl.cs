@@ -33,10 +33,21 @@ namespace BloomingCommunity.Runtime {
 
         internal IEnumerable<(string, Func<int>)> storyVariables {
             get {
-                foreach (var (name, tile) in tiles.plants) {
+                foreach (string name in tiles.plantNames) {
+                    yield return ($"{name}_seed", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => !t.fullyGrown)
+                        .Count()
+                    );
                     yield return ($"{name}_grown", () => objects
                         .GetUsedTiles()
-                        .Where(t => t.Item2 == tile)
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => t.fullyGrown)
                         .Count()
                     );
                 }
