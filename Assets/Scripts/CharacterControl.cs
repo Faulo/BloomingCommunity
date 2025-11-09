@@ -113,6 +113,8 @@ namespace BloomingCommunity.Runtime {
                         if (speechTimer > 0) {
                             float t = Mathf.Lerp(intendedSpeech.Length, 0, speechTimer / (intendedSpeech.Length * asset.letterDuration));
                             currentSpeech = intendedSpeech[..Mathf.RoundToInt(t)];
+                        } else {
+                            currentSpeech = intendedSpeech;
                         }
 
                         if (currentSpeech == intendedSpeech) {
