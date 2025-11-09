@@ -25,8 +25,8 @@ namespace BloomingCommunity.Runtime {
 
         public ECharacterState state = ECharacterState.Idle;
 
-        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab) {
-            gameObject = UObject.Instantiate(asset.prefab);
+        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab, Transform parent) {
+            gameObject = UObject.Instantiate(asset.prefab, parent);
             gameObject.tag = asset.tag;
 
             if (gameObject.TryGetComponent(out animator)) {

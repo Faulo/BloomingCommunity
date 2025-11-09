@@ -15,12 +15,13 @@ namespace BloomingCommunity.Runtime {
 
         readonly TileDatabase tiles;
         readonly UIDocument speechPrefab;
+        readonly Transform parent;
 
-        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab) {
+        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab, Transform parent) {
             this.grid = grid;
             this.tiles = tiles;
             this.speechPrefab = speechPrefab;
-
+            this.parent = parent;
             var tilemaps = grid.GetComponentsInChildren<Tilemap>();
             ground = tilemaps[0];
             objects = tilemaps[1];
@@ -70,7 +71,7 @@ namespace BloomingCommunity.Runtime {
         }
 
         public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
-            var character = new CharacterControl(asset, this, speechPrefab);
+            var character = new CharacterControl(asset, this, speechPrefab, parent);
             if (addToCharacters) {
                 characters.Add(character);
             }
