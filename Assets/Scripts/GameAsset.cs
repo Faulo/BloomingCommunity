@@ -18,6 +18,8 @@ namespace BloomingCommunity.Runtime {
         public TileDatabase tiles;
         [SerializeField]
         public UIDocument speechPrefab;
+        [SerializeField]
+        public APICall[] winningCalls = Array.Empty<APICall>();
 
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;
@@ -32,6 +34,12 @@ namespace BloomingCommunity.Runtime {
             }
 
             manager = new(this);
+        }
+
+        public void Win() {
+            foreach (var call in winningCalls) {
+                call.CallAPI();
+            }
         }
 
         public void Quit() {
