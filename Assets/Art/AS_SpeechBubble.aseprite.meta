@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 501ef2fbd515c8d4f9b4491846003919
+guid: 5e42f7e85acf6d2458733a2b3988ba65
 importerOverride:
   nativeImporterType: 2089858483
   scriptedImporterType:
@@ -16,11 +16,11 @@ ScriptedImporter:
   useMasterPalette: 0
   importVariants:
     processors:
-    - rid: 2150340395084021816
+    - rid: 1435579770340376909
   references:
     version: 2
     RefIds:
-    - rid: 2150340395084021816
+    - rid: 1435579770340376909
       type: {class: AsepriteSpriteProcessor, ns: Slothsoft.Aseprite.Editor, asm: Slothsoft.Aseprite.Editor}
       data:
         key: sprite

@@ -105,18 +105,28 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal void ForceStartCutscene(Story story) {
-            story.ChoosePathString("requirements");
             currentStory = story;
             state = ECommunityState.PlayCutscene;
         }
 
         bool TryStartCutscene() {
             for (int i = 0; i < stories.Count; i++) {
-                stories[i].ChoosePathString("requirements");
+                SetUpStory(stories[i]);
             }
 
             currentStory = stories.Where(s => s.canContinue).DefaultIfEmpty().RandomElement();
             return currentStory is not null;
+        }
+
+        void SetUpStory(Story story) {
+            foreach (var (key, getter) in map.storyVariables) {
+                if (story.variablesState.GlobalVariableExistsWithName(key)) {
+                    int value = getter();
+                    story.variablesState[key] = value;
+                }
+            }
+
+            story.ChoosePathString("requirements");
         }
 
         void WaitForDespawn() {

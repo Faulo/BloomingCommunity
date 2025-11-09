@@ -10,6 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94940ac492cece94c9948289170902b4, type: 3}
-  m_Name: T_Plant_Zucchini
+  m_Name: T_Plant_Zucchini_1
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.PlantTile
-  source: {fileID: -8092674096318147737, guid: 4fec7d78bca1bce4c8a9abc7f14af65f, type: 3}
+  id: zuc
+  sprite: {fileID: -5115358515376399775, guid: d8fc1b999d430dd4d8e224756e459eb3, type: 3}
+  nextStage: {fileID: 11400000, guid: e60b44055f910c04b94006016dd8bbab, type: 2}

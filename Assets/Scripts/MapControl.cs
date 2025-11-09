@@ -31,6 +31,29 @@ namespace BloomingCommunity.Runtime {
 
         public readonly List<CharacterControl> characters = new();
 
+        internal IEnumerable<(string, Func<int>)> storyVariables {
+            get {
+                foreach (string name in tiles.plantNames) {
+                    yield return ($"{name}_seed", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => !t.fullyGrown)
+                        .Count()
+                    );
+                    yield return ($"{name}_grown", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => t.fullyGrown)
+                        .Count()
+                    );
+                }
+            }
+        }
+
         public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
             var character = new CharacterControl(asset, this, speechPrefab);
             if (addToCharacters) {

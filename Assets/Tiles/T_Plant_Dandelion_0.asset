@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94940ac492cece94c9948289170902b4, type: 3}
+  m_Name: T_Plant_Dandelion_0
+  m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.PlantTile
+  id: dan
+  sprite: {fileID: -2891556694463309217, guid: b5cdab7e4e2ff654b862b74d074a1279, type: 3}
+  nextStage: {fileID: 11400000, guid: f562d48bfc392e7479191122143fd255, type: 2}
