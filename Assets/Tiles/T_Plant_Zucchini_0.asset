@@ -15,3 +15,6 @@ MonoBehaviour:
   id: zuc
   sprite: {fileID: -2891556694463309217, guid: d8fc1b999d430dd4d8e224756e459eb3, type: 3}
   nextStage: {fileID: 11400000, guid: 111bb1ffc78c47342af1bc4903be0da7, type: 2}
+  isSeed: 1
+  isFullyGrown: 0
+  isDead: 0

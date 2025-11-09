@@ -6,6 +6,7 @@ namespace BloomingCommunity.Runtime {
         Busy,
         Blocked,
         Growing,
-        Plant
+        Plant,
+        Harvesting
     }
 }

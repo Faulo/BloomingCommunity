@@ -84,6 +84,7 @@ namespace BloomingCommunity.Runtime {
             [ECharacterState.Blocked] = "Walk",
             [ECharacterState.Growing] = "Grow",
             [ECharacterState.Plant] = "Sow",
+            [ECharacterState.Harvesting] = "Sow",
         };
 
         float speechTimer = 0;
@@ -233,6 +234,19 @@ namespace BloomingCommunity.Runtime {
                     }
 
                     break;
+                case ECharacterState.Harvesting:
+                    stateTimer -= deltaTime;
+
+                    if (stateTimer <= 0) {
+                        state = ECharacterState.Idle;
+                        map.RemovePlantAt(selectedPosition2D);
+
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+                    }
+
+                    break;
             }
         }
 
@@ -262,6 +276,11 @@ namespace BloomingCommunity.Runtime {
         internal void Grow() {
             state = ECharacterState.Growing;
             stateTimer = asset.growDuration;
+        }
+
+        internal void Harvest() {
+            state = ECharacterState.Harvesting;
+            stateTimer = asset.harvestDuration;
         }
 
         internal void Plant(string plant) {

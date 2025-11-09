@@ -1,19 +1,25 @@
-VAR days = 0
+VAR tul_grown = 0
 
 -> scene
 
 === requirements ===
-{days == 0: -> scene}
+{tul_grown == 0: -> scene}
 -> END
 
 === scene ===
 # erin goto field
 # barbara goto field
-# erin say
-Ein Feld!
+-
 
 # erin plant tul
+# barbara plant dan
+-
+
+# erin goto west
+# barbara goto east
+-
+
 # erin say
-Hier möchte ich etwas hinpflanzen.
+Fertig!
 
 -> END

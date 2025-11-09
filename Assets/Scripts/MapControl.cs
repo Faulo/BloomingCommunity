@@ -39,7 +39,7 @@ namespace BloomingCommunity.Runtime {
                         .Select(t => t.Item2)
                         .OfType<PlantTile>()
                         .Where(t => t.id == name)
-                        .Where(t => !t.fullyGrown)
+                        .Where(t => t.isSeed)
                         .Count()
                     );
                     yield return ($"{name}_grown", () => objects
@@ -47,7 +47,15 @@ namespace BloomingCommunity.Runtime {
                         .Select(t => t.Item2)
                         .OfType<PlantTile>()
                         .Where(t => t.id == name)
-                        .Where(t => t.fullyGrown)
+                        .Where(t => t.isFullyGrown)
+                        .Count()
+                    );
+                    yield return ($"{name}_dead", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => t.isDead)
                         .Count()
                     );
                 }
@@ -172,6 +180,12 @@ namespace BloomingCommunity.Runtime {
         internal void GrowPlantAt(Vector2Int position) {
             if (objects.GetTile(position.SwizzleXY()) is PlantTile { nextStage: PlantTile plant }) {
                 objects.SetTile(position.SwizzleXY(), plant);
+            }
+        }
+
+        internal void RemovePlantAt(Vector2Int position) {
+            if (objects.GetTile(position.SwizzleXY()) is PlantTile) {
+                objects.SetTile(position.SwizzleXY(), default);
             }
         }
     }
