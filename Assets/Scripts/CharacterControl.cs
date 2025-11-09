@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,8 +25,8 @@ namespace BloomingCommunity.Runtime {
 
         public ECharacterState state = ECharacterState.Idle;
 
-        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab) {
-            gameObject = UObject.Instantiate(asset.prefab);
+        public CharacterControl(CharacterAsset asset, MapControl map, UIDocument speechPrefab, Transform parent) {
+            gameObject = UObject.Instantiate(asset.prefab, parent);
             gameObject.tag = asset.tag;
 
             if (gameObject.TryGetComponent(out animator)) {
@@ -89,12 +90,18 @@ namespace BloomingCommunity.Runtime {
 
         float speechTimer = 0;
 
+        public bool isInvisible { get; private set; }
+
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
             gameObject.name = $"{asset.tag}: {state}";
 
             if (isActive) {
                 if (animator) {
+                    animator.runtimeAnimatorController = isInvisible
+                        ? asset.invisibleAnimator
+                        : asset.animator;
+
                     animator.Play(anim_facing[facing] + anim_state[state]);
                     gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
                 } else {
@@ -138,6 +145,8 @@ namespace BloomingCommunity.Runtime {
         string stateText = string.Empty;
 
         public void FixedUpdate(float deltaTime) {
+            isInvisible = asset.invisibleWhenOtherCharactersPresent && map.characters.Any(c => c.isActive && c != this);
+
             switch (state) {
                 case ECharacterState.Idle:
                     if (intendedMove != Vector2Int.zero) {
@@ -215,7 +224,10 @@ namespace BloomingCommunity.Runtime {
 
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
-                        map.PlantPlantAt(selectedPosition2D, stateText);
+                        if (map.TryPlantPlantAt(selectedPosition2D, stateText)) { 
+                            asset.sowEvent.PlayOnce();
+                            PlayVFX(asset.sowParticles, selectedPosition2D);
+                        }
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -228,7 +240,10 @@ namespace BloomingCommunity.Runtime {
 
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
-                        map.GrowPlantAt(selectedPosition2D);
+                        if (map.TryGrowPlantAt(selectedPosition2D)) {
+                            asset.growEvent.PlayOnce();
+                            PlayVFX(asset.growParticles, selectedPosition2D);
+                        }
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -241,7 +256,10 @@ namespace BloomingCommunity.Runtime {
 
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
-                        map.RemovePlantAt(selectedPosition2D);
+                        if (map.TryRemovePlantAt(selectedPosition2D)) {
+                            asset.harvestEvent.PlayOnce();
+                            PlayVFX(asset.harvestParticles, selectedPosition2D);
+                        }
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -249,6 +267,12 @@ namespace BloomingCommunity.Runtime {
                     }
 
                     break;
+            }
+        }
+
+        void PlayVFX(GameObject prefab, Vector2Int position) {
+            if (prefab) {
+                UObject.Instantiate(prefab, map.GridToWorld(position), Quaternion.identity);
             }
         }
 
@@ -276,6 +300,10 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal void Grow() {
+            if (isInvisible) {
+                return;
+            }
+
             state = ECharacterState.Growing;
             stateTimer = asset.growDuration;
         }

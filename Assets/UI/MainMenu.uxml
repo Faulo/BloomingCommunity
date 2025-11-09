@@ -7,7 +7,7 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; justify-content: center;">
             <Strayfarer.UI.BindableButton text="Start" on-click="Start" />
-            <Strayfarer.UI.BindableButton text="Call Noah&apos;s API" on-click="Win" />
+            <Strayfarer.UI.BindableButton text="Call Noah&apos;s API" on-click="Win" style="display: none;" />
             <Strayfarer.UI.BindableButton text="Quit" on-click="Quit" />
         </ui:VisualElement>
         <Bindings>

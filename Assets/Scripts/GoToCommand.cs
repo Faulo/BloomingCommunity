@@ -65,8 +65,10 @@ namespace BloomingCommunity.Runtime {
                 (_, true, _, _, _) => horizontalMove,
                 (_, _, true, _, true) => verticalMove,
                 (_, _, _, true, _) => horizontalMove,
-                (_, _, _, _, true) => horizontalMove * Sign(URandom.Range(-1, 1)),
-                _ => verticalMove * Sign(URandom.Range(-1, 1)),
+                _ => URandom.Range(0, 2) switch {
+                    0 => -horizontalMove,
+                    _ => -verticalMove,
+                },
             };
         }
     }

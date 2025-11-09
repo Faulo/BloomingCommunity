@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
   prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
   animator: {fileID: 6227694144673515183, guid: 8ecba24686f2f6f4c9d6c8c095d4349d, type: 3}
+  invisibleAnimator: {fileID: 0}
   tag: Barbara
   letterDuration: 0.1
   speechPause: 2.5
   moveDuration: 0.3
   facingDuration: 0.1
   blockedDuration: 0.2
+  growDuration: 1
+  plantDuration: 1
+  harvestDuration: 1
   stepEvent:
     Guid:
       Data1: -1553437905
@@ -37,8 +41,25 @@ MonoBehaviour:
     Path: event:/bonk
   growEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 805357518
+      Data2: 1241346269
+      Data3: 1461525387
+      Data4: -2088267252
+    Path: event:/plant
+  sowEvent:
+    Guid:
+      Data1: 805357518
+      Data2: 1241346269
+      Data3: 1461525387
+      Data4: -2088267252
+    Path: event:/plant
+  harvestEvent:
+    Guid:
+      Data1: 805357518
+      Data2: 1241346269
+      Data3: 1461525387
+      Data4: -2088267252
+    Path: event:/plant
+  growParticles: {fileID: 8200505798084154082, guid: 4bb9e8768fd373a4c8b2e45322c207e0, type: 3}
+  sowParticles: {fileID: 7684900048373411683, guid: 5e4fe2cd8b5cb144b8fc78484560b622, type: 3}
+  harvestParticles: {fileID: 7684900048373411683, guid: 5e4fe2cd8b5cb144b8fc78484560b622, type: 3}

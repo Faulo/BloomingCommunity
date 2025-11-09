@@ -13,6 +13,7 @@
     "com.unity.ide.visualstudio": "2.0.25",
     "com.unity.inputsystem": "1.14.2",
     "com.unity.render-pipelines.universal": "17.2.0",
+    "com.unity.modules.particlesystem": "1.0.0",
     "net.slothsoft.aseprite": "1.0.0-pre.3"
   },
   "scopedRegistries": [

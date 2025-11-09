@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Art/AS_Endscreen.aseprite?fileID=8457802857175238380&amp;guid=3ac0a52046f260643af0a2bd4a9ebedf&amp;type=3#AS_Endscreen.aseprite.albedo.png&quot;); -unity-slice-left: 8; -unity-slice-top: 8; -unity-slice-right: 8; -unity-slice-bottom: 8; -unity-slice-scale: 3px; width: 50%; height: 50%; align-items: center; align-self: center; justify-content: center; top: 25%;">
+        <ui:Label text="To be continued..." style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/PixeloidSans-E40en.ttf?fileID=12800000&amp;guid=03cfa4b3451e3384aa3bf397946d2518&amp;type=3#PixeloidSans-E40en&quot;); color: rgb(64, 80, 16); font-size: 14px;" />
+    </ui:VisualElement>
+</ui:UXML>

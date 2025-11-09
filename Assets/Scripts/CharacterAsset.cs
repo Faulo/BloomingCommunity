@@ -9,6 +9,11 @@ namespace BloomingCommunity.Runtime {
         public GameObject prefab;
         [SerializeField]
         public RuntimeAnimatorController animator;
+        [SerializeField]
+        public RuntimeAnimatorController invisibleAnimator;
+
+        public bool invisibleWhenOtherCharactersPresent => invisibleAnimator;
+
         [Tag]
         [SerializeField]
         public string tag;
@@ -42,5 +47,17 @@ namespace BloomingCommunity.Runtime {
         public EventReference bonkEvent = new();
         [SerializeField]
         public EventReference growEvent = new();
+        [SerializeField]
+        public EventReference sowEvent = new();
+        [SerializeField]
+        public EventReference harvestEvent = new();
+
+        [Header("VFX")]
+        [SerializeField]
+        public GameObject growParticles;
+        [SerializeField]
+        public GameObject sowParticles;
+        [SerializeField]
+        public GameObject harvestParticles;
     }
 }

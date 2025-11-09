@@ -15,12 +15,13 @@ namespace BloomingCommunity.Runtime {
 
         readonly TileDatabase tiles;
         readonly UIDocument speechPrefab;
+        readonly Transform parent;
 
-        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab) {
+        public MapControl(Grid grid, TileDatabase tiles, UIDocument speechPrefab, Transform parent) {
             this.grid = grid;
             this.tiles = tiles;
             this.speechPrefab = speechPrefab;
-
+            this.parent = parent;
             var tilemaps = grid.GetComponentsInChildren<Tilemap>();
             ground = tilemaps[0];
             objects = tilemaps[1];
@@ -70,7 +71,7 @@ namespace BloomingCommunity.Runtime {
         }
 
         public CharacterControl CreateCharacter(CharacterAsset asset, bool addToCharacters) {
-            var character = new CharacterControl(asset, this, speechPrefab);
+            var character = new CharacterControl(asset, this, speechPrefab, parent);
             if (addToCharacters) {
                 characters.Add(character);
             }
@@ -94,8 +95,13 @@ namespace BloomingCommunity.Runtime {
                 && !objects.GetTile(position.SwizzleXY());
         }
 
-        public void PlantPlantAt(Vector2Int position, string plant) {
-            objects.SetTile(position.SwizzleXY(), tiles.GetPlant(plant));
+        public bool TryPlantPlantAt(Vector2Int position, string plant) {
+            if (tiles.GetPlant(plant) is { } tile && objects.GetTile(position.SwizzleXY()) != tile) {
+                objects.SetTile(position.SwizzleXY(), tile);
+                return true;
+            }
+
+            return false;
         }
 
         public void Update(float deltaTime) {
@@ -184,16 +190,22 @@ namespace BloomingCommunity.Runtime {
             return false;
         }
 
-        internal void GrowPlantAt(Vector2Int position) {
+        internal bool TryGrowPlantAt(Vector2Int position) {
             if (objects.GetTile(position.SwizzleXY()) is PlantTile { nextStage: PlantTile plant }) {
                 objects.SetTile(position.SwizzleXY(), plant);
+                return true;
             }
+
+            return false;
         }
 
-        internal void RemovePlantAt(Vector2Int position) {
+        internal bool TryRemovePlantAt(Vector2Int position) {
             if (objects.GetTile(position.SwizzleXY()) is PlantTile) {
                 objects.SetTile(position.SwizzleXY(), default);
+                return true;
             }
+
+            return false;
         }
     }
 }
