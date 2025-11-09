@@ -132,6 +132,7 @@ namespace BloomingCommunity.Runtime {
 
         float stateTimer = 0;
         Vector2Int statePosition2D;
+        string stateText = string.Empty;
 
         public void FixedUpdate(float deltaTime) {
             switch (state) {
@@ -207,7 +208,30 @@ namespace BloomingCommunity.Runtime {
 
                     break;
                 case ECharacterState.Plant:
-                    state = ECharacterState.Idle;
+                    stateTimer -= deltaTime;
+
+                    if (stateTimer <= 0) {
+                        state = ECharacterState.Idle;
+                        map.PlantPlantAt(selectedPosition2D, stateText);
+
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+                    }
+
+                    break;
+                case ECharacterState.Growing:
+                    stateTimer -= deltaTime;
+
+                    if (stateTimer <= 0) {
+                        state = ECharacterState.Idle;
+                        map.GrowPlantAt(selectedPosition2D);
+
+                        if (stateTimer < 0) {
+                            FixedUpdate(Mathf.Abs(stateTimer));
+                        }
+                    }
+
                     break;
             }
         }
@@ -235,9 +259,15 @@ namespace BloomingCommunity.Runtime {
             stateTimer = asset.blockedDuration;
         }
 
-        internal void Plant(MapControl map, string plant) {
+        internal void Grow() {
+            state = ECharacterState.Growing;
+            stateTimer = asset.growDuration;
+        }
+
+        internal void Plant(string plant) {
             state = ECharacterState.Plant;
-            map.Plant(selectedPosition2D, plant);
+            stateTimer = asset.plantDuration;
+            stateText = plant;
         }
 
         internal void Say(string text) {

@@ -79,7 +79,7 @@ namespace BloomingCommunity.Runtime {
                 && !objects.GetTile(position.SwizzleXY());
         }
 
-        public void Plant(Vector2Int position, string plant) {
+        public void PlantPlantAt(Vector2Int position, string plant) {
             objects.SetTile(position.SwizzleXY(), tiles.GetPlant(plant));
         }
 
@@ -167,6 +167,12 @@ namespace BloomingCommunity.Runtime {
 
             positions = default;
             return false;
+        }
+
+        internal void GrowPlantAt(Vector2Int position) {
+            if (objects.GetTile(position.SwizzleXY()) is PlantTile { nextStage: PlantTile plant }) {
+                objects.SetTile(position.SwizzleXY(), plant);
+            }
         }
     }
 }

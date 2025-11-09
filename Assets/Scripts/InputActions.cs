@@ -339,6 +339,17 @@ namespace BloomingCommunity.Runtime
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ca77bf38-fd14-4224-b7b5-869cf25ccded"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""67bc0f0d-cb0f-4848-b72a-19b2d8a7edde"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -361,8 +372,30 @@ namespace BloomingCommunity.Runtime
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8d6a5760-3d67-42de-90db-e913d10947f3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7951b47d-ca1e-4634-b8d4-d6d410918f85"",
                     ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ded5295-55af-49c8-a5ce-e9e83979f74d"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -383,8 +416,30 @@ namespace BloomingCommunity.Runtime
                 },
                 {
                     ""name"": """",
+                    ""id"": ""86ae730b-4905-4d5f-8a43-30380b9d9a1c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""05130960-497d-4af6-be51-f7bfe8d0f71f"",
                     ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac7962dd-6ca9-4e8f-8b73-dbf455dd3e44"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
