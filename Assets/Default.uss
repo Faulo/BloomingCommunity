@@ -1,0 +1,38 @@
+:root {
+}
+
+.unity-button {
+    -unity-font-definition: url("project://database/Assets/Fonts/PixeloidSans-E40en.ttf?fileID=12800000&guid=03cfa4b3451e3384aa3bf397946d2518&type=3#PixeloidSans-E40en");
+    border-left-color: rgb(64, 80, 16);
+    border-right-color: rgb(64, 80, 16);
+    border-top-color: rgb(64, 80, 16);
+    border-bottom-color: rgb(64, 80, 16);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    color: rgb(64, 80, 16);
+    background-color: rgb(208, 208, 88);
+    font-size: 13px;
+}
+
+.unity-button:hover {
+    background-color: rgb(160, 168, 64);
+}
+
+.unity-button:focus {
+    background-color: rgb(160, 168, 64);
+}
+
+.unity-button:focus:active {
+    border-left-color: rgb(160, 168, 64);
+    border-right-color: rgb(160, 168, 64);
+    border-top-color: rgb(160, 168, 64);
+    border-bottom-color: rgb(160, 168, 64);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    color: rgb(160, 168, 64);
+    background-color: rgb(64, 80, 16);
+}
