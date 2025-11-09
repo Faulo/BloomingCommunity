@@ -12,7 +12,7 @@ namespace BloomingCommunity.Runtime {
 
         public bool TryUpdateAndFinish(float deltaTime) {
             if (map.IsFreeToPlant(character.selectedPosition2D) && character.state == ECharacterState.Idle) {
-                character.Plant(map, plant);
+                character.Plant(plant);
             }
 
             return character.state == ECharacterState.Idle;
