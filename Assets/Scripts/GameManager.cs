@@ -30,13 +30,13 @@ namespace BloomingCommunity.Runtime {
 
             character.isActive = true;
 
-            avatar = new(character, input);
+            community = new(game.community, map);
+
+            avatar = new(character, input, game.debugMenu, community);
 
             foreach (var asset in game.humans) {
                 map.CreateCharacter(asset, true);
             }
-
-            community = new(game.community, map);
         }
 
         void OnUpdate(float deltaTime) {

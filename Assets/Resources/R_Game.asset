@@ -21,3 +21,4 @@ MonoBehaviour:
   speechPrefab: {fileID: 1530696236811694461, guid: 53d4683893889554093782aae119c32e, type: 3}
   winningCalls:
   - {fileID: 11400000, guid: 8e6e9089ecc8ffd498952de443758ef2, type: 2}
+  debugMenu: {fileID: 348363370803641082, guid: 5e2af8509d7b61d41b88e97239688113, type: 3}
