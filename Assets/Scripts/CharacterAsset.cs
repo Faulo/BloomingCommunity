@@ -47,5 +47,17 @@ namespace BloomingCommunity.Runtime {
         public EventReference bonkEvent = new();
         [SerializeField]
         public EventReference growEvent = new();
+        [SerializeField]
+        public EventReference sowEvent = new();
+        [SerializeField]
+        public EventReference harvestEvent = new();
+
+        [Header("VFX")]
+        [SerializeField]
+        public GameObject growParticles;
+        [SerializeField]
+        public GameObject sowParticles;
+        [SerializeField]
+        public GameObject harvestParticles;
     }
 }

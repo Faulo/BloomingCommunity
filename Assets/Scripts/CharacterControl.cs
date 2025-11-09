@@ -226,6 +226,9 @@ namespace BloomingCommunity.Runtime {
                         state = ECharacterState.Idle;
                         map.PlantPlantAt(selectedPosition2D, stateText);
 
+                        asset.sowEvent.PlayOnce();
+                        PlayVFX(asset.sowParticles, selectedPosition2D);
+
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
                         }
@@ -238,6 +241,9 @@ namespace BloomingCommunity.Runtime {
                     if (stateTimer <= 0) {
                         state = ECharacterState.Idle;
                         map.GrowPlantAt(selectedPosition2D);
+
+                        asset.growEvent.PlayOnce();
+                        PlayVFX(asset.growParticles, selectedPosition2D);
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -252,12 +258,21 @@ namespace BloomingCommunity.Runtime {
                         state = ECharacterState.Idle;
                         map.RemovePlantAt(selectedPosition2D);
 
+                        asset.harvestEvent.PlayOnce();
+                        PlayVFX(asset.harvestParticles, selectedPosition2D);
+
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
                         }
                     }
 
                     break;
+            }
+        }
+
+        void PlayVFX(GameObject prefab, Vector2Int position) {
+            if (prefab) {
+                UObject.Instantiate(prefab, map.GridToWorld(position), Quaternion.identity);
             }
         }
 
