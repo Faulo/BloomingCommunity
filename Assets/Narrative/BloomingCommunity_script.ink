@@ -1,5 +1,4 @@
-INCLUDE day_01.ink
 Line Start
--> day_01
-
+VAR tul_grown = 0
+VAR dan_grown = 0
 -> END

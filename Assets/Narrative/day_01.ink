@@ -1,4 +1,13 @@
-== day_01 ==
+VAR tul_grown = 0
+VAR dan_grown = 0
+VAR days = 1
+-> day_01
+
+== requirements ==
+-> day_01
+-> END
+
+=== day_01 ===
 
 # erin spawn west
 # barbara spawn west
