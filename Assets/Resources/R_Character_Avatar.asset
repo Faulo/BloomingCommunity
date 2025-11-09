@@ -22,11 +22,11 @@ MonoBehaviour:
   blockedDuration: 0.3
   stepEvent:
     Guid:
-      Data1: -1553437905
-      Data2: 1320518985
-      Data3: -2016731207
-      Data4: 862170643
-    Path: event:/foot_01
+      Data1: -673063953
+      Data2: 1151727787
+      Data3: -1446690144
+      Data4: -579086734
+    Path: event:/foot_02
   stepInterval: 0.2
   bonkEvent:
     Guid:
