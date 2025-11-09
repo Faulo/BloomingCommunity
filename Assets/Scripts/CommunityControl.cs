@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
+using URandom = UnityEngine.Random;
 
 namespace BloomingCommunity.Runtime {
     sealed class CommunityControl {
@@ -15,6 +17,8 @@ namespace BloomingCommunity.Runtime {
         readonly List<ICommand> commands = new();
 
         Story currentStory;
+
+        public event Action onCompleteStories;
 
         public CommunityControl(CommunityAsset asset, MapControl map) {
             this.asset = asset;
@@ -36,7 +40,11 @@ namespace BloomingCommunity.Runtime {
                 case ECommunityState.None:
                     stateTimer -= deltaTime;
                     if (stateTimer <= 0) {
-                        state = ECommunityState.StartCutscene;
+                        if (stories.Count > 0) {
+                            state = ECommunityState.StartCutscene;
+                        } else {
+                            state = ECommunityState.StoriesCompleted;
+                        }
 
                         if (stateTimer < 0) {
                             FixedUpdate(Mathf.Abs(stateTimer));
@@ -78,6 +86,12 @@ namespace BloomingCommunity.Runtime {
 
                     WaitForTravellers();
                     break;
+                case ECommunityState.StoriesCompleted:
+                    onCompleteStories?.Invoke();
+                    state = ECommunityState.Done;
+                    break;
+                case ECommunityState.Done:
+                    break;
             }
         }
 
@@ -104,7 +118,7 @@ namespace BloomingCommunity.Runtime {
             return false;
         }
 
-        float randomWait => Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
+        float randomWait => URandom.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
 
         void WaitForTravellers() {
             stateTimer = randomWait;

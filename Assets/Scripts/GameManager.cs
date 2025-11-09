@@ -33,6 +33,7 @@ namespace BloomingCommunity.Runtime {
             character.isActive = true;
 
             community = new(game.community, map);
+            community.onCompleteStories += game.Win;
 
             avatar = new(character, input, game.debugMenu, community, game);
 

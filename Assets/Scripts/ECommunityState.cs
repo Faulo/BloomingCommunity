@@ -3,6 +3,8 @@ namespace BloomingCommunity.Runtime {
         None,
         StartCutscene,
         PlayCutscene,
-        EndCutscene
+        EndCutscene,
+        StoriesCompleted,
+        Done
     }
 }

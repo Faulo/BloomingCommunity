@@ -24,6 +24,8 @@ namespace BloomingCommunity.Runtime {
         public APICall[] winningCalls = Array.Empty<APICall>();
         [SerializeField]
         internal UIDocument debugMenu;
+        [SerializeField]
+        internal UIDocument winMenu;
 
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;
@@ -41,6 +43,8 @@ namespace BloomingCommunity.Runtime {
         }
 
         public void Win() {
+            var win = Instantiate(winMenu);
+
             foreach (var call in winningCalls) {
                 call.CallAPI();
             }

@@ -24,3 +24,4 @@ MonoBehaviour:
   winningCalls:
   - {fileID: 11400000, guid: 8e6e9089ecc8ffd498952de443758ef2, type: 2}
   debugMenu: {fileID: 348363370803641082, guid: 5e2af8509d7b61d41b88e97239688113, type: 3}
+  winMenu: {fileID: 348363370803641082, guid: fd7e405660941de47a6c794eb276b573, type: 3}
