@@ -1,6 +1,5 @@
 VAR tul_grown = 0
 VAR dan_grown = 0
-VAR days = 1
 -> day_01
 
 == requirements ==
@@ -13,6 +12,7 @@ VAR days = 1
 # barbara spawn west
 # erin say
 WHAT! is THAT!!
+
 # erin goto field
 # barbara goto field
 

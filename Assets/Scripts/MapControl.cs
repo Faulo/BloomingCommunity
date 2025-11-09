@@ -125,8 +125,8 @@ namespace BloomingCommunity.Runtime {
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
                 _ when TryGetCharacter(type, out var character) => new[] { character.position2D },
-                _ when TryGetSpecialByName(type, out var plantPositions) => plantPositions,
-                _ when TryGetPlantsByName(type, out var plantPositions) => plantPositions,
+                _ when TryGetSpecialByName(type, out var positions) => positions,
+                _ when TryGetPlantsByName(type, out var positions) => positions,
                 _ => Enumerable.Empty<Vector2Int>(),
             };
         }
@@ -142,7 +142,7 @@ namespace BloomingCommunity.Runtime {
 
         bool TryGetSpecialByName(string name, out IEnumerable<Vector2Int> positions) {
             if (tiles.TryGetSpecial(name, out var tile)) {
-                positions = objects
+                positions = special
                     .GetUsedTiles()
                     .Where(t => t.Item2 == tile)
                     .Select(t => t.Item1.SwizzleXY());

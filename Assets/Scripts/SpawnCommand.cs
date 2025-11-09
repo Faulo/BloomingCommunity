@@ -1,5 +1,6 @@
 using System.Linq;
 using Slothsoft.UnityExtensions;
+using UnityEngine;
 
 namespace BloomingCommunity.Runtime {
     sealed class SpawnCommand : ICommand {
@@ -20,6 +21,7 @@ namespace BloomingCommunity.Runtime {
 
             var positions = map.FindPositionsOfType(target).ToList();
             if (positions.Count == 0) {
+                Debug.LogWarning($"Cannot spawn {character} at '{target}', no room!");
                 return false;
             }
 
