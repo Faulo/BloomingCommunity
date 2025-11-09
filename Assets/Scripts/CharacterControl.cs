@@ -17,8 +17,10 @@ namespace BloomingCommunity.Runtime {
         readonly MapControl map;
         readonly UIDocument speech;
 
-        string speechText = string.Empty;
-        string todoText = string.Empty;
+        string currentSpeech = string.Empty;
+        string intendedSpeech = string.Empty;
+
+        internal bool isSpeaking => !string.IsNullOrEmpty(intendedSpeech);
 
         public ECharacterState state = ECharacterState.Idle;
 
@@ -99,25 +101,27 @@ namespace BloomingCommunity.Runtime {
                 }
 
                 if (isSpeaking) {
-                    if (speechText == todoText) {
+                    if (currentSpeech == intendedSpeech) {
                         speechTimer -= deltaTime;
                         if (speechTimer < 0) {
-                            speechText = todoText = string.Empty;
+                            currentSpeech = intendedSpeech = string.Empty;
                         }
                     } else {
                         speechTimer -= deltaTime;
 
                         if (speechTimer > 0) {
-                            float t = Mathf.Lerp(todoText.Length, 0, speechTimer / (todoText.Length * asset.letterDuration));
-                            speechText = todoText[..Mathf.RoundToInt(t)];
-                        } else {
-                            speechText = todoText;
+                            float t = Mathf.Lerp(intendedSpeech.Length, 0, speechTimer / (intendedSpeech.Length * asset.letterDuration));
+                            currentSpeech = intendedSpeech[..Mathf.RoundToInt(t)];
+                        }
+
+                        if (currentSpeech == intendedSpeech) {
+                            // done talking, linger
                             speechTimer = asset.speechPause;
                         }
                     }
                 }
 
-                speech.rootVisualElement.Q<Label>().text = speechText;
+                speech.rootVisualElement.Q<Label>().text = currentSpeech;
                 speech.rootVisualElement.style.display = isSpeaking
                     ? DisplayStyle.Flex
                     : DisplayStyle.None;
@@ -236,14 +240,12 @@ namespace BloomingCommunity.Runtime {
             map.Plant(selectedPosition2D, plant);
         }
 
-        internal bool isSpeaking => !string.IsNullOrEmpty(todoText);
-
         internal void Say(string text) {
-            speechText = string.Empty;
-            todoText = string.IsNullOrEmpty(text)
+            currentSpeech = string.Empty;
+            intendedSpeech = string.IsNullOrEmpty(text)
                 ? string.Empty
                 : text;
-            speechTimer = asset.letterDuration * todoText.Length;
+            speechTimer = asset.letterDuration * intendedSpeech.Length;
         }
     }
 }
