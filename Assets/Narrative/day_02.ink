@@ -19,6 +19,7 @@ Oh. I didn't know tulips could grow that fast.
 In the end Bertie did get me into his silly little hobby after all. 
 #ruth say
 Sly old fox.
+# ruth plant tul
 
 # erin spawn west
 # barbara spawn west
@@ -103,6 +104,10 @@ noop
 # barbara spawn east
 noop
 # barbara despawn west
+
+#wait
+noop
+
 -> END
 
 ==day_02_dan==
@@ -153,11 +158,33 @@ Ummmm-
 Erin Garcia Mendez. You know better than to leave the house without someone to watch you!
 
 # erin say
+IT. IS. BORING.
+# erin say
+And you never ever keep your promises!
+# erin say
+It's always "tomorrow", "tomorrow", because you're always busy!
+# erin say
+And I'm not allowed to do anything by myself!
+# erin say
+I can't go outside, I can't see my friends- I can't have fun!
+# erin say
+If you could you would just leave me at home to rot forever!
+# erin say
+Then I can sit in a room and stare at the wall for eternity, just like you want me to.
+# barbara say
+Erin, I can't be at two places at once. There's nobody at the house to watch you right now, what do you want me to-
+# erin say
+I! DON'T! KNOW!
+# erin despawn south
+# barbara say
+Erin-
+# barbara say 
+Erin come back here!
+# barbara despawn south
+noop
 
-//TODO
-
-
-
+#wait
+noop
 ->END
 
 

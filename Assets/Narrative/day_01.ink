@@ -72,4 +72,7 @@ noop
 There c: puffy flower. Awesome.
 # erin despawn east
 noop
+
+#wait
+noop
 -> END
