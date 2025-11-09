@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -89,12 +90,18 @@ namespace BloomingCommunity.Runtime {
 
         float speechTimer = 0;
 
+        public bool isInvisible { get; private set; }
+
         public void Update(float deltaTime) {
             gameObject.SetActive(isActive);
             gameObject.name = $"{asset.tag}: {state}";
 
             if (isActive) {
                 if (animator) {
+                    animator.runtimeAnimatorController = isInvisible
+                        ? asset.invisibleAnimator
+                        : asset.animator;
+
                     animator.Play(anim_facing[facing] + anim_state[state]);
                     gameObject.transform.SetPositionAndRotation(position3D, Quaternion.Euler(0, 0, 0));
                 } else {
@@ -138,6 +145,8 @@ namespace BloomingCommunity.Runtime {
         string stateText = string.Empty;
 
         public void FixedUpdate(float deltaTime) {
+            isInvisible = asset.invisibleWhenOtherCharactersPresent && map.characters.Any(c => c.isActive && c != this);
+
             switch (state) {
                 case ECharacterState.Idle:
                     if (intendedMove != Vector2Int.zero) {
@@ -276,6 +285,10 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal void Grow() {
+            if (isInvisible) {
+                return;
+            }
+
             state = ECharacterState.Growing;
             stateTimer = asset.growDuration;
         }

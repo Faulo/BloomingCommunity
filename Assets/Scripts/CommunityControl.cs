@@ -104,8 +104,10 @@ namespace BloomingCommunity.Runtime {
             return false;
         }
 
+        float randomWait => Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
+
         void WaitForTravellers() {
-            stateTimer = Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
+            stateTimer = randomWait;
             state = ECommunityState.None;
         }
 
@@ -149,6 +151,12 @@ namespace BloomingCommunity.Runtime {
             command = default;
 
             string[] args = tag.ToLower().Split(' ');
+
+            switch (args[0]) {
+                case "wait":
+                    command = new WaitCommand(randomWait);
+                    return true;
+            }
 
             if (!map.TryGetCharacter(args[0], out var character)) {
                 Debug.LogWarning($"Unknown character '{args[0]}'!");

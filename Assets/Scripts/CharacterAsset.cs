@@ -9,6 +9,11 @@ namespace BloomingCommunity.Runtime {
         public GameObject prefab;
         [SerializeField]
         public RuntimeAnimatorController animator;
+        [SerializeField]
+        public RuntimeAnimatorController invisibleAnimator;
+
+        public bool invisibleWhenOtherCharactersPresent => invisibleAnimator;
+
         [Tag]
         [SerializeField]
         public string tag;
