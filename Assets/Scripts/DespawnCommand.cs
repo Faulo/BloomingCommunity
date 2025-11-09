@@ -36,8 +36,8 @@ namespace BloomingCommunity.Runtime {
                 targetPosition = positions.RandomElement();
             }
 
-            if ((character.position2D + character.facing) == targetPosition) {
-                if (character.state == ECharacterState.Idle) {
+            if (map.IsPositionsOfType(character.position2D, target) || map.IsPositionsOfType(character.selectedPosition2D, target)) {
+                if (character.state is ECharacterState.Idle or ECharacterState.Blocked or ECharacterState.Facing) {
                     character.intendedMove = Vector2Int.zero;
                     character.isActive = false;
                     return true;

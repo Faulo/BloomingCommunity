@@ -8,6 +8,8 @@ namespace BloomingCommunity.Runtime {
     sealed class CharacterControl {
         public string name => asset.tag;
 
+        public override string ToString() => $"Character {name}";
+
         readonly GameObject gameObject;
         readonly Animator animator;
         readonly FMODEventPlayer audio;

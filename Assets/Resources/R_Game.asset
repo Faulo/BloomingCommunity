@@ -16,6 +16,8 @@ MonoBehaviour:
   humans:
   - {fileID: 11400000, guid: 2d6e54b57c68ae04a89bf234a93a04bc, type: 2}
   - {fileID: 11400000, guid: 1bf06a13bf682c84890ce15542639c31, type: 2}
+  - {fileID: 11400000, guid: 442ac8d8b9f3a1944b8b2231d0119140, type: 2}
+  timeScale: 2
   community: {fileID: 11400000, guid: 29a24a319e1a1e14daca6e9b462fa159, type: 2}
   tiles: {fileID: 11400000, guid: 8aac248d45cfe9e4c824163b0d3505cc, type: 2}
   speechPrefab: {fileID: 1530696236811694461, guid: 53d4683893889554093782aae119c32e, type: 3}

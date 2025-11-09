@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94940ac492cece94c9948289170902b4, type: 3}
+  m_Name: T_Plant_Zucchini_2
+  m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.PlantTile
+  id: zuc
+  sprite: {fileID: -1242682827576884657, guid: d8fc1b999d430dd4d8e224756e459eb3, type: 3}
+  nextStage: {fileID: 11400000, guid: 46ad341b8cfc92c47a97693106fd62ed, type: 2}

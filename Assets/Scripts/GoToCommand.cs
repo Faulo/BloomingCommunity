@@ -27,6 +27,11 @@ namespace BloomingCommunity.Runtime {
                 }
             }
 
+            if (map.IsPositionsOfType(character.position2D, target) || map.IsPositionsOfType(character.selectedPosition2D, target)) {
+                character.intendedMove = Vector2Int.zero;
+                return character.state is ECharacterState.Idle or ECharacterState.Blocked or ECharacterState.Facing;
+            }
+
             if (!targetPosition.HasValue || !map.IsFreeToMove(targetPosition.Value)) {
                 var positions = map.FindPositionsOfType(target).ToList();
                 if (positions.Count == 0) {
@@ -34,11 +39,6 @@ namespace BloomingCommunity.Runtime {
                 }
 
                 targetPosition = positions.RandomElement();
-            }
-
-            if ((character.position2D + character.facing) == targetPosition) {
-                character.intendedMove = Vector2Int.zero;
-                return character.state == ECharacterState.Idle;
             }
 
             SetMoveIntention(character, map, targetPosition.Value);

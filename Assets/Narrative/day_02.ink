@@ -1,103 +1,109 @@
 //day 2
+VAR tul_grown = 0
+VAR dan_grown = 0
+VAR days = 2
 
-//you chose tulip
+== requirements ==
+{days == 2 && tul_grown >0: -> day_02_tul}
+{days == 2 && dan_grown >0: -> day_02_dan}
+-> END
+
+==day_02_tul==
+# ruth spawn north
 # ruth goto field
 # ruth say
 Oh. I didn't know tulips could grow that fast.
 //if you can code a pause
 In the end Bertie did get me into his silly little hobby after all. Sly old fox.
 
-Erin:
+# erin spawn west
+# barbara spawn west
+# erin say
 Mom, can we look at the garden thingy today?
 I wanna see my flower!
+# erin goto field
+# barbara goto field
 
-Mom:
+# barbara say
 Those usually don't pop up overnight hon. Honestly Erin, I still need to-
 Oh! Mrs. Weylin. I hadn't seen you around much.
 
-Ruth:
+# ruth say
 ...lovely to see you too, Barbara. //adjust for tone?
 I'm doing fine, thank you for asking.
 
-Erin:
+# erin say
 That's a pretty flower!
 It's not the daintylion I planted yesterday though.
 
-Ruth:
+# ruth say
 You put <i>weeds</i> in my flower patch?
 Count yourself lucky //idk something mean
 
-Mom:
+# barbara say
 It's not "your garden Ruth", it's a community garden.
 I'm not yelling at my kid for that. //needs something
 
-Ruth:
+# ruth say
 //rant about accountability or something
-//leaves
+# ruth despawn north
 
-Mom:
+# barbara say
 //needs something
 I watch my kid just fine. Can mind her own damn buissness.
 Let's head in Erin.
 
-Erin:
+# erin say
 But I want to plant something! Before Mrs. Waylin takes control of everything-
 
-Mom:
+# barbara say
 Tomorrow Erin, I still have to get the car fixed today.
 Dinner's in the fridge, I'll be home as soon as I can.
 
-Erin:
+# erin say
 But-
 
-Mom:
+# barbara say
 I'm already late, no buts.
-//
 
 //put conflict in dandy route
-Mom:
+# barbara say
 Erin, when exactly did you plant a dandelion? You were asleep when I got home last night.
 
-Erin:
+# erin say
 Ummmm-
 
-Mom:
+# barbara say
 Erin Garcia Mendez. You know better than to leave the house without someone to watch you!
 
-Erin:
+# erin say
 I don
 //TODO
 
-//you chose the dandelion
-Ruth:
+-> END
+
+==day_02_dan==
+# ruth say
 Ugh! Like I said, overrun.
 
 //Erin runs ahead
-Erin:
+# erin say
 Mom look! The flower I planted grew up!
 I love these fluffy guys!
 
-Ruth:
+# ruth say
 Erin dear, that is a weed. Stop spreading the seeds around, you're making this so called community project more hopeless than it already was. //needs something
 
 // Mom catches up
-Mom:
+# barbara say
 Erin, I really don't have time for this.
 
-Erin:
+# erin say
 No Mrs. Wylin, I planted this myself! I'ts my favorite flower, I think.
 
--->END
-//day 3
 
 
-
-
-
-
-
-
-//you chose dandelion
+->END
 
 
 

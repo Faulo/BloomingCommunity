@@ -33,10 +33,21 @@ namespace BloomingCommunity.Runtime {
 
         internal IEnumerable<(string, Func<int>)> storyVariables {
             get {
-                foreach (var (name, tile) in tiles.plants) {
+                foreach (string name in tiles.plantNames) {
+                    yield return ($"{name}_seed", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => !t.fullyGrown)
+                        .Count()
+                    );
                     yield return ($"{name}_grown", () => objects
                         .GetUsedTiles()
-                        .Where(t => t.Item2 == tile)
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => t.fullyGrown)
                         .Count()
                     );
                 }
@@ -114,14 +125,17 @@ namespace BloomingCommunity.Runtime {
                     .Select(t => t.Item1.SwizzleXY())
                     .Where(IsFreeToSpawn),
                 _ when TryGetCharacter(type, out var character) => new[] { character.position2D },
-                _ when TryGetSpecialByName(type, out var plantPositions) => plantPositions,
-                _ when TryGetPlantsByName(type, out var plantPositions) => plantPositions,
+                _ when TryGetSpecialByName(type, out var positions) => positions,
+                _ when TryGetPlantsByName(type, out var positions) => positions,
                 _ => Enumerable.Empty<Vector2Int>(),
             };
         }
 
         internal bool IsPositionsOfType(Vector2Int position, string type) {
             return type switch {
+                "random" => tiles.IsSpecial(special.GetTile(position.SwizzleXY())),
+                "off" => tiles.IsOff(special.GetTile(position.SwizzleXY())),
+                "field" => tiles.IsField(ground.GetTile(position.SwizzleXY())),
                 _ when TryGetCharacter(type, out var character) => position == character.position2D,
                 _ when TryGetSpecialByName(type, out var positions) => positions.Contains(position),
                 _ when TryGetPlantsByName(type, out var positions) => positions.Contains(position),
@@ -131,7 +145,7 @@ namespace BloomingCommunity.Runtime {
 
         bool TryGetSpecialByName(string name, out IEnumerable<Vector2Int> positions) {
             if (tiles.TryGetSpecial(name, out var tile)) {
-                positions = objects
+                positions = special
                     .GetUsedTiles()
                     .Where(t => t.Item2 == tile)
                     .Select(t => t.Item1.SwizzleXY());
