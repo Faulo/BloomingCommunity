@@ -41,7 +41,9 @@ namespace BloomingCommunity.Runtime {
             intendedMove = context.ReadValue<Vector2>();
         }
         public void OnFire(InputAction.CallbackContext context) {
-            character.Grow();
+            if (character.state is ECharacterState.Idle) {
+                character.Grow();
+            }
         }
         public void OnPause(InputAction.CallbackContext context) {
 

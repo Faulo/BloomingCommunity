@@ -49,6 +49,7 @@ namespace BloomingCommunity.Runtime {
                 case ECommunityState.StartCutscene:
                     if (TryStartCutscene()) {
                         state = ECommunityState.PlayCutscene;
+                        ProcessStoryTags();
                     } else {
                         WaitForTravellers();
                     }
@@ -60,12 +61,8 @@ namespace BloomingCommunity.Runtime {
                     }
 
                     if (currentStory.canContinue) {
-                        string text = currentStory.Continue();
-                        foreach (string tag in currentStory.currentTags) {
-                            if (TryParse(tag, text, out var command)) {
-                                commands.Add(command);
-                            }
-                        }
+                        currentStory.Continue();
+                        ProcessStoryTags();
                     } else {
                         stories.Remove(currentStory);
                         currentStory = null;
@@ -81,6 +78,14 @@ namespace BloomingCommunity.Runtime {
 
                     WaitForTravellers();
                     break;
+            }
+        }
+
+        void ProcessStoryTags() {
+            foreach (string tag in currentStory.currentTags) {
+                if (TryParse(tag, currentStory.currentText, out var command)) {
+                    commands.Add(command);
+                }
             }
         }
 
@@ -105,8 +110,10 @@ namespace BloomingCommunity.Runtime {
         }
 
         internal void ForceStartCutscene(Story story) {
+            SetUpStory(story);
             currentStory = story;
             state = ECommunityState.PlayCutscene;
+            ProcessStoryTags();
         }
 
         bool TryStartCutscene() {
@@ -127,6 +134,7 @@ namespace BloomingCommunity.Runtime {
             }
 
             story.ChoosePathString("requirements");
+            story.Continue();
         }
 
         void WaitForDespawn() {
