@@ -95,8 +95,13 @@ namespace BloomingCommunity.Runtime {
                 && !objects.GetTile(position.SwizzleXY());
         }
 
-        public void PlantPlantAt(Vector2Int position, string plant) {
-            objects.SetTile(position.SwizzleXY(), tiles.GetPlant(plant));
+        public bool TryPlantPlantAt(Vector2Int position, string plant) {
+            if (tiles.GetPlant(plant) is { } tile && objects.GetTile(position.SwizzleXY()) != tile) {
+                objects.SetTile(position.SwizzleXY(), tile);
+                return true;
+            }
+
+            return false;
         }
 
         public void Update(float deltaTime) {
@@ -185,16 +190,22 @@ namespace BloomingCommunity.Runtime {
             return false;
         }
 
-        internal void GrowPlantAt(Vector2Int position) {
+        internal bool TryGrowPlantAt(Vector2Int position) {
             if (objects.GetTile(position.SwizzleXY()) is PlantTile { nextStage: PlantTile plant }) {
                 objects.SetTile(position.SwizzleXY(), plant);
+                return true;
             }
+
+            return false;
         }
 
-        internal void RemovePlantAt(Vector2Int position) {
+        internal bool TryRemovePlantAt(Vector2Int position) {
             if (objects.GetTile(position.SwizzleXY()) is PlantTile) {
                 objects.SetTile(position.SwizzleXY(), default);
+                return true;
             }
+
+            return false;
         }
     }
 }
