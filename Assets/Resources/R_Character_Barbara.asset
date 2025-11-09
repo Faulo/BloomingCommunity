@@ -16,7 +16,7 @@ MonoBehaviour:
   animator: {fileID: 6227694144673515183, guid: 8ecba24686f2f6f4c9d6c8c095d4349d, type: 3}
   tag: Barbara
   letterDuration: 0.1
-  speechPause: 3
+  speechPause: 2.5
   moveDuration: 0.3
   facingDuration: 0.1
   blockedDuration: 0.2

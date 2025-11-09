@@ -16,7 +16,7 @@ MonoBehaviour:
   animator: {fileID: 6227694144673515183, guid: 7c006345c06b0904c8191c5245e2ccbc, type: 3}
   tag: Erin
   letterDuration: 0.1
-  speechPause: 3
+  speechPause: 2
   moveDuration: 0.2
   facingDuration: 0.1
   blockedDuration: 0.2
