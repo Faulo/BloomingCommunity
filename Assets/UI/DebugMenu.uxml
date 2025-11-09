@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement data-source="project://database/Assets/Resources/R_Community.asset?fileID=11400000&amp;guid=29a24a319e1a1e14daca6e9b462fa159&amp;type=2#R_Community">
+        <Strayfarer.UI.SimpleListView style="flex-direction: row; flex-wrap: wrap;" />
+    </ui:VisualElement>
+</ui:UXML>

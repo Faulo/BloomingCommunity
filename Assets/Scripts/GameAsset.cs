@@ -20,6 +20,8 @@ namespace BloomingCommunity.Runtime {
         public UIDocument speechPrefab;
         [SerializeField]
         public APICall[] winningCalls = Array.Empty<APICall>();
+        [SerializeField]
+        internal UIDocument debugMenu;
 
         [CreateProperty]
         public bool gamePaused => manager is null || manager.isPaused;

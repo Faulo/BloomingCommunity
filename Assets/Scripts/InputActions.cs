@@ -120,6 +120,15 @@ namespace BloomingCommunity.Runtime
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8b1a211-9da3-4ac1-b7f8-9e8ab6584a39"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -329,6 +338,17 @@ namespace BloomingCommunity.Runtime
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7951b47d-ca1e-4634-b8d4-d6d410918f85"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -919,6 +939,7 @@ namespace BloomingCommunity.Runtime
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            m_Player_Debug = m_Player.FindAction("Debug", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1015,6 +1036,7 @@ namespace BloomingCommunity.Runtime
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_Debug;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1038,6 +1060,10 @@ namespace BloomingCommunity.Runtime
             /// Provides access to the underlying input action "Player/Pause".
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_Player_Pause;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Debug".
+            /// </summary>
+            public InputAction @Debug => m_Wrapper.m_Player_Debug;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1073,6 +1099,9 @@ namespace BloomingCommunity.Runtime
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Debug.started += instance.OnDebug;
+                @Debug.performed += instance.OnDebug;
+                @Debug.canceled += instance.OnDebug;
             }
 
             /// <summary>
@@ -1093,6 +1122,9 @@ namespace BloomingCommunity.Runtime
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Debug.started -= instance.OnDebug;
+                @Debug.performed -= instance.OnDebug;
+                @Debug.canceled -= instance.OnDebug;
             }
 
             /// <summary>
@@ -1414,6 +1446,13 @@ namespace BloomingCommunity.Runtime
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Debug" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnDebug(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

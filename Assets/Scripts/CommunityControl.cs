@@ -10,7 +10,8 @@ namespace BloomingCommunity.Runtime {
         readonly MapControl map;
         ECommunityState state;
 
-        readonly List<Story> stories = new();
+        public readonly List<Story> stories = new();
+        public readonly Dictionary<Story, string> storyNames = new();
         readonly List<ICommand> commands = new();
 
         Story currentStory;
@@ -20,7 +21,9 @@ namespace BloomingCommunity.Runtime {
             this.map = map;
 
             foreach (var cutscene in asset.cutscenes) {
-                stories.Add(new Story(cutscene.text));
+                var story = new Story(cutscene.text);
+                stories.Add(story);
+                storyNames[story] = cutscene.name;
             }
 
             WaitForTravellers();
@@ -99,6 +102,11 @@ namespace BloomingCommunity.Runtime {
         void WaitForTravellers() {
             stateTimer = Random.Range(asset.minWaitForTravellers, asset.maxWaitForTravellers);
             state = ECommunityState.None;
+        }
+
+        internal void ForceCutscene(Story story) {
+            currentStory = story;
+            state = ECommunityState.PlayCutscene;
         }
 
         bool TryStartCutscene() {
