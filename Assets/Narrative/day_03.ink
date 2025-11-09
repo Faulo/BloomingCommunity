@@ -1,4 +1,5 @@
 //day 3
+VAR tul_grown = 0
 
 == requirements ==
 
