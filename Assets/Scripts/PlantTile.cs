@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.Utilities;
 using UnityEngine.Tilemaps;
 
 namespace BloomingCommunity.Runtime {
@@ -14,7 +13,14 @@ namespace BloomingCommunity.Runtime {
         [SerializeField]
         internal PlantTile nextStage;
 
-        internal bool fullyGrown => !nextStage;
+        [SerializeField]
+        internal bool isSeed;
+
+        [SerializeField]
+        internal bool isFullyGrown;
+
+        [SerializeField]
+        internal bool isDead;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) {
             tileData.sprite = sprite;
