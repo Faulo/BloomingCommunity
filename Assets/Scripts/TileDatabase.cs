@@ -18,17 +18,17 @@ namespace BloomingCommunity.Runtime {
 
         [SerializeField]
         SerializableKeyValuePairs<string, TileBase> special = new();
-        internal bool IsSpecial(TileBase tile) => special.Values.Contains(tile);
-        internal bool TryGetSpecial(string name, out TileBase tile) => special.TryGetValue(name, out tile);
+        public bool IsSpecial(TileBase tile) => special.Values.Contains(tile);
+        public bool TryGetSpecial(string name, out TileBase tile) => special.TryGetValue(name, out tile);
 
         [SerializeField]
         PlantTile[] plants = Array.Empty<PlantTile>();
 
-        internal IEnumerable<string> plantNames => plants.Select(t => t.id).Distinct();
+        public IEnumerable<string> plantNames => plants.Select(t => t.id).Distinct();
 
-        internal TileBase GetPlant(string name) => plants.FirstOrDefault(t => t.id == name);
+        public TileBase GetPlant(string name) => plants.FirstOrDefault(t => t.id == name);
 
-        internal bool TryGetPlant(string name, out TileBase tile) {
+        public bool TryGetPlant(string name, out TileBase tile) {
             return tile = GetPlant(name);
         }
     }

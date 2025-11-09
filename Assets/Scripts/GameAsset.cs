@@ -10,6 +10,8 @@ namespace BloomingCommunity.Runtime {
         public CharacterAsset avatar;
         [SerializeField]
         public CharacterAsset[] humans = Array.Empty<CharacterAsset>();
+        [SerializeField]
+        public float timeScale = 1;
 
         [Space]
         [SerializeField]

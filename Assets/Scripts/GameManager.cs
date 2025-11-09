@@ -4,7 +4,7 @@ using UObject = UnityEngine.Object;
 
 namespace BloomingCommunity.Runtime {
     sealed class GameManager {
-
+        readonly GameAsset asset;
         readonly GameObject gameObject;
         readonly MapControl map;
         readonly InputActions input;
@@ -15,6 +15,8 @@ namespace BloomingCommunity.Runtime {
         internal bool isPaused;
 
         public GameManager(GameAsset game) {
+            asset = game;
+
             gameObject = new(nameof(GameManager));
             var runner = gameObject.AddComponent<ObjectRunner>();
             runner.onUpdate += OnUpdate;
@@ -44,6 +46,8 @@ namespace BloomingCommunity.Runtime {
                 return;
             }
 
+            deltaTime *= asset.timeScale;
+
             avatar.Update(deltaTime);
             map.Update(deltaTime);
         }
@@ -52,6 +56,8 @@ namespace BloomingCommunity.Runtime {
             if (isPaused) {
                 return;
             }
+
+            deltaTime *= asset.timeScale;
 
             avatar.FixedUpdate(deltaTime);
             map.FixedUpdate(deltaTime);

@@ -133,6 +133,9 @@ namespace BloomingCommunity.Runtime {
 
         internal bool IsPositionsOfType(Vector2Int position, string type) {
             return type switch {
+                "random" => tiles.IsSpecial(special.GetTile(position.SwizzleXY())),
+                "off" => tiles.IsOff(special.GetTile(position.SwizzleXY())),
+                "field" => tiles.IsField(ground.GetTile(position.SwizzleXY())),
                 _ when TryGetCharacter(type, out var character) => position == character.position2D,
                 _ when TryGetSpecialByName(type, out var positions) => positions.Contains(position),
                 _ when TryGetPlantsByName(type, out var positions) => positions.Contains(position),
