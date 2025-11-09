@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94940ac492cece94c9948289170902b4, type: 3}
-  m_Name: T_Plant_Tulip_0
+  m_Name: T_Plant_Dandelion_Dead
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.PlantTile
-  id: tul
-  sprite: {fileID: -2891556694463309217, guid: 4fec7d78bca1bce4c8a9abc7f14af65f, type: 3}
-  nextStage: {fileID: 11400000, guid: 40037c42382935d40b576532fc4df414, type: 2}
-  isSeed: 1
+  id: dan
+  sprite: {fileID: -2891556694463309217, guid: 501ef2fbd515c8d4f9b4491846003919, type: 3}
+  nextStage: {fileID: 11400000, guid: cca73615ad1198843b5e354b6f402af3, type: 2}
+  isSeed: 0
   isFullyGrown: 0
-  isDead: 0
+  isDead: 1

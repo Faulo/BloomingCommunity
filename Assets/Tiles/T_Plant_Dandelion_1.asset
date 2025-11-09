@@ -15,3 +15,6 @@ MonoBehaviour:
   id: dan
   sprite: {fileID: -5115358515376399775, guid: b5cdab7e4e2ff654b862b74d074a1279, type: 3}
   nextStage: {fileID: 11400000, guid: 37ab3ff884d1a6a4c997ac5b91abfd89, type: 2}
+  isSeed: 1
+  isFullyGrown: 0
+  isDead: 0

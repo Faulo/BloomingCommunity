@@ -39,7 +39,7 @@ namespace BloomingCommunity.Runtime {
                         .Select(t => t.Item2)
                         .OfType<PlantTile>()
                         .Where(t => t.id == name)
-                        .Where(t => !t.fullyGrown)
+                        .Where(t => t.isSeed)
                         .Count()
                     );
                     yield return ($"{name}_grown", () => objects
@@ -47,7 +47,15 @@ namespace BloomingCommunity.Runtime {
                         .Select(t => t.Item2)
                         .OfType<PlantTile>()
                         .Where(t => t.id == name)
-                        .Where(t => t.fullyGrown)
+                        .Where(t => t.isFullyGrown)
+                        .Count()
+                    );
+                    yield return ($"{name}_dead", () => objects
+                        .GetUsedTiles()
+                        .Select(t => t.Item2)
+                        .OfType<PlantTile>()
+                        .Where(t => t.id == name)
+                        .Where(t => t.isDead)
                         .Count()
                     );
                 }

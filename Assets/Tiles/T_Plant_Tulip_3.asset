@@ -15,3 +15,6 @@ MonoBehaviour:
   id: tul
   sprite: {fileID: -2209775234989312156, guid: 4fec7d78bca1bce4c8a9abc7f14af65f, type: 3}
   nextStage: {fileID: 0}
+  isSeed: 0
+  isFullyGrown: 1
+  isDead: 0
