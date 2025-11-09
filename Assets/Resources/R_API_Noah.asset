@@ -20,6 +20,6 @@ MonoBehaviour:
     - key: el1
       value: earth
     - key: el2
-      value: earth
+      value: water
     - key: el3
-      value: mystic
+      value: air
