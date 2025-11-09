@@ -16,7 +16,7 @@ namespace BloomingCommunity.Runtime {
 
         [SerializeField]
         SerializableKeyValuePairs<string, TileBase> special = new();
-        internal string randomSpecial => special.Keys.RandomElement();
+        internal bool IsSpecial(TileBase tile) => special.Values.Contains(tile);
         internal bool TryGetSpecial(string name, out TileBase tile) => special.TryGetValue(name, out tile);
 
         [SerializeField]

@@ -86,7 +86,11 @@ namespace BloomingCommunity.Runtime {
 
         internal IEnumerable<Vector2Int> FindPositionsOfType(string type) {
             return type switch {
-                "random" => FindPositionsOfType(tiles.randomSpecial),
+                "random" => special
+                    .GetUsedTiles()
+                    .Where(t => tiles.IsSpecial(t.Item2))
+                    .Select(t => t.Item1.SwizzleXY())
+                    .Where(IsFreeToSpawn),
                 "off" => special
                     .GetUsedTiles()
                     .Where(t => tiles.IsOff(t.Item2))
@@ -101,6 +105,15 @@ namespace BloomingCommunity.Runtime {
                 _ when TryGetSpecialByName(type, out var plantPositions) => plantPositions,
                 _ when TryGetPlantsByName(type, out var plantPositions) => plantPositions,
                 _ => Enumerable.Empty<Vector2Int>(),
+            };
+        }
+
+        internal bool IsPositionsOfType(Vector2Int position, string type) {
+            return type switch {
+                _ when TryGetCharacter(type, out var character) => position == character.position2D,
+                _ when TryGetSpecialByName(type, out var positions) => positions.Contains(position),
+                _ when TryGetPlantsByName(type, out var positions) => positions.Contains(position),
+                _ => false,
             };
         }
 

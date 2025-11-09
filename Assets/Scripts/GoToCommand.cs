@@ -17,16 +17,14 @@ namespace BloomingCommunity.Runtime {
             this.target = target;
         }
 
+        SpawnCommand spawn;
+
         public bool TryUpdateAndFinish(float deltaTime) {
             if (!character.isActive) {
-                var positions = map.FindPositionsOfType("off").ToList();
-                if (positions.Count == 0) {
+                spawn ??= new(character, map);
+                if (!spawn.TryUpdateAndFinish(deltaTime)) {
                     return false;
                 }
-
-                character.TeleportTo(positions.RandomElement());
-                character.isActive = true;
-                return false;
             }
 
             if (!targetPosition.HasValue || !map.IsFreeToMove(targetPosition.Value)) {

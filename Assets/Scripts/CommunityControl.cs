@@ -129,6 +129,8 @@ namespace BloomingCommunity.Runtime {
             }
 
             command = args[1] switch {
+                "spawn" => new SpawnCommand(character, map, args.ElementAtOrDefault(2)),
+                "despawn" => new DespawnCommand(character, map, args.ElementAtOrDefault(2)),
                 "goto" => new GoToCommand(character, map, args[2]),
                 "say" => new SayCommand(character, text),
                 "plant" => new PlantCommand(character, map, args[2]),
