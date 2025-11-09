@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: BloomingCommunity.Runtime::BloomingCommunity.Runtime.CharacterAsset
   prefab: {fileID: 7112399866465388028, guid: 2e75f980632ec684f9c8745348111305, type: 3}
   animator: {fileID: 6227694144673515183, guid: 00553bf84541c514690b8d45c201b074, type: 3}
+  invisibleAnimator: {fileID: 6227694144673515183, guid: f6df0c89196bd40478eddffa42ef4e0c, type: 3}
   tag: Player
   letterDuration: 0.1
   speechPause: 3
   moveDuration: 0.25
   facingDuration: 0.1
   blockedDuration: 0.3
+  growDuration: 1
+  plantDuration: 1
+  harvestDuration: 1
   stepEvent:
     Guid:
       Data1: -673063953
