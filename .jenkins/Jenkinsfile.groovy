@@ -32,7 +32,7 @@ pipeline {
 							FORMATTING_EXCLUDE : 'Library Assets/Plugins Packages',
 
 							// which executables to create
-							BUILD_FOR_WINDOWS : '0',
+							BUILD_FOR_WINDOWS : '1',
 							BUILD_FOR_LINUX : '0',
 							BUILD_FOR_MAC : '0',
 							BUILD_FOR_WEBGL : '1',
@@ -40,7 +40,7 @@ pipeline {
 
 							// which platforms to deploy to
 							DEPLOY_TO_STEAM : '0',
-							DEPLOY_TO_ITCH : '0',
+							DEPLOY_TO_ITCH : '1',
 							DEPLOY_ON_FAILURE : '1',
 
 							// configration for deploying to steam
@@ -51,7 +51,7 @@ pipeline {
 							STEAM_CREDENTIALS : '',
 
 							// configuration for deploying to itch
-							ITCH_ID : 'faulo/blooming-community',
+							ITCH_ID : 'stumbleduck/blooming-community',
 							ITCH_CREDENTIALS : 'Faulo-itch.io',
 
 							// configuration for deploying to Discord
