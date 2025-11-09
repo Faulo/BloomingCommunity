@@ -10,24 +10,28 @@ VAR dan_grown = 0
 ==day_02_tul==
 # ruth spawn north
 noop
-# ruth goto field
+# ruth goto tul_grown
 noop
 # ruth say
 Oh. I didn't know tulips could grow that fast.
 //if you can code a pause
 # ruth say
-In the end Bertie did get me into his silly little hobby after all. Sly old fox.
+In the end Bertie did get me into his silly little hobby after all. 
+#ruth say
+Sly old fox.
 
 # erin spawn west
 # barbara spawn west
 noop
 # erin say
 Mom, can we look at the garden thingy today?
+# erin goto field
+noop
 # erin say
 I wanna see my flower!
-# erin goto field
-# barbara goto field
+# barbara goto tul_grown
 noop
+
 
 # barbara say
 Those usually don't pop up overnight hon. Honestly Erin, I still need to-
@@ -38,7 +42,10 @@ Oh! Mrs. Weylin. I hadn't seen you around much.
 ...lovely to see you too, Barbara. //adjust for tone?
 # ruth say
 I'm doing fine, thank you for asking.
+//thing about how barbara used to make an effort to see ruth but hasn't lately
 
+#erin goto tul_grown
+noop
 # erin say
 That's a pretty flower!
 # erin say
@@ -57,13 +64,21 @@ It's not "your garden Ruth", it's a community garden.
 And I'm not yelling at my kid for that. //needs something
 
 # ruth say
-something mean
-//rant about accountability or something
-# ruth despawn north
+You take no accountability for you child! You can't even be bothered to supervise her.
+# ruth say
+No woder she's running around mucking up the hard work of other people.
+# ruth harvest tul_grown
+noop
 
 # barbara say
-//needs something
-I watch my kid just fine. Can mind her own damn buissness.
+I watch my kid just fine. 
+
+# ruth despawn north
+noop
+
+
+#barbara say
+Can mind her own damn buissness.
 # barbara say
 Let's head in Erin.
 
@@ -81,7 +96,53 @@ But-
 # barbara say
 I'm already late, no buts.
 
-//put conflict in dandy route
+# barbara despawn east
+# erin despawn east
+noop 
+
+# barbara spawn east
+noop
+# barbara despawn west
+-> END
+
+==day_02_dan==
+# ruth spawn north
+noop
+#ruth goto dan_grown
+noop
+# ruth say
+Ugh! Like I said, overrun.
+
+//Erin runs ahead
+# erin spawn west
+# barbara spawn west
+noop
+#erin goto dan_grown
+noop
+# erin say
+Mom look! The flower I planted grew up!
+#barbara goto field
+# erin say
+I love these fluffy guys!
+# barbara say
+Erin, I really don't have time for this.
+# erin harvest dan_grown
+
+# ruth say
+Erin dear, that is a weed. Nobody plants them, they crawl in on their own.
+#ruth say
+Stop spreading the seeds around, you're making this so called "community project" more hopeless than it already was. //needs something
+#ruth say
+Not that I give those tulips much of a fighting chance anyhow. Bertie was the one with the green thumb, not me.
+
+# erin say
+No Mrs. Wylin, I planted this myself! I'ts my favorite flower, I think.
+#erin say
+Where is Mr. Wylin? He'd love this.
+
+# ruth day
+Yes, he would have loved this.
+
 # barbara say
 Erin, when exactly did you plant a dandelion? You were asleep when I got home last night.
 
@@ -92,30 +153,8 @@ Ummmm-
 Erin Garcia Mendez. You know better than to leave the house without someone to watch you!
 
 # erin say
-I don
+
 //TODO
-
--> END
-
-==day_02_dan==
-# ruth say
-Ugh! Like I said, overrun.
-
-//Erin runs ahead
-# erin say
-Mom look! The flower I planted grew up!
-# erin say
-I love these fluffy guys!
-
-# ruth say
-Erin dear, that is a weed. Stop spreading the seeds around, you're making this so called community project more hopeless than it already was. //needs something
-
-// Mom catches up
-# barbara say
-Erin, I really don't have time for this.
-
-# erin say
-No Mrs. Wylin, I planted this myself! I'ts my favorite flower, I think.
 
 
 
