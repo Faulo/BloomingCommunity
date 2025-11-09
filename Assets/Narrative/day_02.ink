@@ -14,43 +14,52 @@ VAR days = 2
 # ruth say
 Oh. I didn't know tulips could grow that fast.
 //if you can code a pause
+# ruth say
 In the end Bertie did get me into his silly little hobby after all. Sly old fox.
 
 # erin spawn west
 # barbara spawn west
 # erin say
 Mom, can we look at the garden thingy today?
+# erin say
 I wanna see my flower!
 # erin goto field
 # barbara goto field
 
 # barbara say
 Those usually don't pop up overnight hon. Honestly Erin, I still need to-
+# barbara say
 Oh! Mrs. Weylin. I hadn't seen you around much.
 
 # ruth say
 ...lovely to see you too, Barbara. //adjust for tone?
+# ruth say
 I'm doing fine, thank you for asking.
 
 # erin say
 That's a pretty flower!
+# erin say
 It's not the daintylion I planted yesterday though.
 
 # ruth say
 You put <i>weeds</i> in my flower patch?
+# ruth say
 Count yourself lucky //idk something mean
 
 # barbara say
 It's not "your garden Ruth", it's a community garden.
+# barbara say
 I'm not yelling at my kid for that. //needs something
 
 # ruth say
+hhhh
 //rant about accountability or something
 # ruth despawn north
 
 # barbara say
 //needs something
 I watch my kid just fine. Can mind her own damn buissness.
+# barbara say
 Let's head in Erin.
 
 # erin say
@@ -58,6 +67,7 @@ But I want to plant something! Before Mrs. Waylin takes control of everything-
 
 # barbara say
 Tomorrow Erin, I still have to get the car fixed today.
+# barbara say
 Dinner's in the fridge, I'll be home as soon as I can.
 
 # erin say
@@ -89,6 +99,7 @@ Ugh! Like I said, overrun.
 //Erin runs ahead
 # erin say
 Mom look! The flower I planted grew up!
+# erin say
 I love these fluffy guys!
 
 # ruth say
