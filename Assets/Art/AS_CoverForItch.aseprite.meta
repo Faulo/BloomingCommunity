@@ -129,7 +129,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: AS_CoverForItch
     originalName: 
-    pivot: {x: 0.2979798, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,8 +137,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 99
-      height: 28
+      width: 630
+      height: 500
     spriteID: 3bffe70193d1b3c45a52fdffbc7c41ee
     spriteBone: []
     spriteOutline: []
@@ -169,8 +169,8 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 99
-        height: 28
+        width: 630
+        height: 500
       spriteId: 3bffe70193d1b3c45a52fdffbc7c41ee
     linkedCells: []
     tileCells: []
@@ -181,5 +181,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 59, y: 28}
-  previousTextureSize: {x: 128, y: 64}
+  canvasSize: {x: 630, y: 500}
+  previousTextureSize: {x: 1024, y: 512}
