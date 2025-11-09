@@ -1,16 +1,17 @@
 //day 2
 VAR tul_grown = 0
 VAR dan_grown = 0
-VAR days = 2
 
 == requirements ==
-{days == 2 && tul_grown >0: -> day_02_tul}
-{days == 2 && dan_grown >0: -> day_02_dan}
+{tul_grown >0: -> day_02_tul}
+{dan_grown >0: -> day_02_dan}
 -> END
 
 ==day_02_tul==
 # ruth spawn north
+noop
 # ruth goto field
+noop
 # ruth say
 Oh. I didn't know tulips could grow that fast.
 //if you can code a pause
@@ -19,12 +20,14 @@ In the end Bertie did get me into his silly little hobby after all. Sly old fox.
 
 # erin spawn west
 # barbara spawn west
+noop
 # erin say
 Mom, can we look at the garden thingy today?
 # erin say
 I wanna see my flower!
 # erin goto field
 # barbara goto field
+noop
 
 # barbara say
 Those usually don't pop up overnight hon. Honestly Erin, I still need to-
@@ -42,17 +45,19 @@ That's a pretty flower!
 It's not the daintylion I planted yesterday though.
 
 # ruth say
-You put <i>weeds</i> in my flower patch?
+You put weeds in my flower patch?
 # ruth say
-Count yourself lucky //idk something mean
+Count yourself lucky those weeds didn't fester and my tulips survived.
+# ruth say
+Barbara, talk some sense into your child!
 
 # barbara say
 It's not "your garden Ruth", it's a community garden.
 # barbara say
-I'm not yelling at my kid for that. //needs something
+And I'm not yelling at my kid for that. //needs something
 
 # ruth say
-hhhh
+something mean
 //rant about accountability or something
 # ruth despawn north
 
