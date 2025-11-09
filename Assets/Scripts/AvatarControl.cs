@@ -12,11 +12,13 @@ namespace BloomingCommunity.Runtime {
         readonly CharacterControl character;
         readonly UIDocument debugPrefab;
         readonly CommunityControl community;
+        readonly GameAsset game;
 
-        public AvatarControl(CharacterControl character, InputActions input, UIDocument debugPrefab, CommunityControl community) {
+        public AvatarControl(CharacterControl character, InputActions input, UIDocument debugPrefab, CommunityControl community, GameAsset game) {
             this.character = character;
             this.debugPrefab = debugPrefab;
             this.community = community;
+            this.game = game;
             input.Player.AddCallbacks(this);
         }
 
@@ -88,6 +90,21 @@ namespace BloomingCommunity.Runtime {
                 };
                 list.itemsSource = community.storyNames.Keys.ToList();
             }
+        }
+
+        public void OnSpeedUp(InputAction.CallbackContext context) {
+            if (!context.performed) {
+                return;
+            }
+
+            game.timeScale *= 2;
+        }
+        public void OnSpeedDown(InputAction.CallbackContext context) {
+            if (!context.performed) {
+                return;
+            }
+
+            game.timeScale /= 2;
         }
     }
 }

@@ -129,6 +129,24 @@ namespace BloomingCommunity.Runtime
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpeedUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""a135df84-33a0-4e02-b3e1-eb0c6939b2bf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpeedDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""23c71a62-9728-4289-a11d-bd01e8352f01"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -349,6 +367,28 @@ namespace BloomingCommunity.Runtime
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6eb8b164-215b-4596-b5f0-1eb3cb858d02"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05130960-497d-4af6-be51-f7bfe8d0f71f"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -940,6 +980,8 @@ namespace BloomingCommunity.Runtime
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
             m_Player_Debug = m_Player.FindAction("Debug", throwIfNotFound: true);
+            m_Player_SpeedUp = m_Player.FindAction("SpeedUp", throwIfNotFound: true);
+            m_Player_SpeedDown = m_Player.FindAction("SpeedDown", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1037,6 +1079,8 @@ namespace BloomingCommunity.Runtime
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_Pause;
         private readonly InputAction m_Player_Debug;
+        private readonly InputAction m_Player_SpeedUp;
+        private readonly InputAction m_Player_SpeedDown;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1064,6 +1108,14 @@ namespace BloomingCommunity.Runtime
             /// Provides access to the underlying input action "Player/Debug".
             /// </summary>
             public InputAction @Debug => m_Wrapper.m_Player_Debug;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/SpeedUp".
+            /// </summary>
+            public InputAction @SpeedUp => m_Wrapper.m_Player_SpeedUp;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/SpeedDown".
+            /// </summary>
+            public InputAction @SpeedDown => m_Wrapper.m_Player_SpeedDown;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1102,6 +1154,12 @@ namespace BloomingCommunity.Runtime
                 @Debug.started += instance.OnDebug;
                 @Debug.performed += instance.OnDebug;
                 @Debug.canceled += instance.OnDebug;
+                @SpeedUp.started += instance.OnSpeedUp;
+                @SpeedUp.performed += instance.OnSpeedUp;
+                @SpeedUp.canceled += instance.OnSpeedUp;
+                @SpeedDown.started += instance.OnSpeedDown;
+                @SpeedDown.performed += instance.OnSpeedDown;
+                @SpeedDown.canceled += instance.OnSpeedDown;
             }
 
             /// <summary>
@@ -1125,6 +1183,12 @@ namespace BloomingCommunity.Runtime
                 @Debug.started -= instance.OnDebug;
                 @Debug.performed -= instance.OnDebug;
                 @Debug.canceled -= instance.OnDebug;
+                @SpeedUp.started -= instance.OnSpeedUp;
+                @SpeedUp.performed -= instance.OnSpeedUp;
+                @SpeedUp.canceled -= instance.OnSpeedUp;
+                @SpeedDown.started -= instance.OnSpeedDown;
+                @SpeedDown.performed -= instance.OnSpeedDown;
+                @SpeedDown.canceled -= instance.OnSpeedDown;
             }
 
             /// <summary>
@@ -1453,6 +1517,20 @@ namespace BloomingCommunity.Runtime
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnDebug(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "SpeedUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpeedUp(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "SpeedDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpeedDown(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

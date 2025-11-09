@@ -34,7 +34,7 @@ namespace BloomingCommunity.Runtime {
 
             community = new(game.community, map);
 
-            avatar = new(character, input, game.debugMenu, community);
+            avatar = new(character, input, game.debugMenu, community, game);
 
             foreach (var asset in game.humans) {
                 map.CreateCharacter(asset, true);
