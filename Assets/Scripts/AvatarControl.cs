@@ -64,7 +64,7 @@ namespace BloomingCommunity.Runtime {
                     var button = new Button();
                     button.clicked += () => {
                         if (button.userData is Story story) {
-                            community.ForceCutscene(story);
+                            community.ForceStartCutscene(story);
                         }
 
                         ToggleDebug();

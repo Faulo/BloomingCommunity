@@ -104,7 +104,8 @@ namespace BloomingCommunity.Runtime {
             state = ECommunityState.None;
         }
 
-        internal void ForceCutscene(Story story) {
+        internal void ForceStartCutscene(Story story) {
+            story.ChoosePathString("requirements");
             currentStory = story;
             state = ECommunityState.PlayCutscene;
         }
