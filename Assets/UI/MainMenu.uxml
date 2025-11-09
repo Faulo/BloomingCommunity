@@ -3,7 +3,7 @@
     <ui:VisualElement data-source="project://database/Assets/Resources/R_Game.asset?fileID=11400000&amp;guid=ad986d02e185c97418f1701f01148478&amp;type=2#R_Game" style="flex-grow: 1; background-color: rgb(208, 208, 88); flex-direction: row; padding-top: 10px; padding-left: 10px; padding-right: 10px;">
         <ui:VisualElement style="flex-grow: 1; width: 70%; justify-content: space-between;">
             <ui:VisualElement name="title" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/AS_Title.aseprite?fileID=8457802857175238380&amp;guid=75ed9f17c06d9704eba981281038ca8d&amp;type=3#AS_Title.aseprite.albedo.png&quot;); -unity-background-scale-mode: scale-to-fit; background-position-x: left 0; width: 80%; height: auto; background-position-y: top 0;" />
-            <ui:Label text="by &#10;Katharina Broswik - Art&#10;Sara Kleyman - Writing, Sound Design&#10;Daniel Schulz - Code" name="credits" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/PixeloidSans-E40en.ttf?fileID=12800000&amp;guid=03cfa4b3451e3384aa3bf397946d2518&amp;type=3#PixeloidSans-E40en&quot;); color: rgb(64, 80, 16); font-size: 9px; white-space: normal;" />
+            <ui:Label text="by &#10;Katharina Broswik - Art&#10;Sara Kleyman - Writing, Sound&#10;Daniel Schulz - Code" name="credits" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/PixeloidSans-E40en.ttf?fileID=12800000&amp;guid=03cfa4b3451e3384aa3bf397946d2518&amp;type=3#PixeloidSans-E40en&quot;); color: rgb(64, 80, 16); font-size: 9px; white-space: normal;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; justify-content: center;">
             <Strayfarer.UI.BindableButton text="Start" on-click="Start" />
