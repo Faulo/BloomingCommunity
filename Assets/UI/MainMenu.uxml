@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement data-source="project://database/Assets/Resources/R_Game.asset?fileID=11400000&amp;guid=ad986d02e185c97418f1701f01148478&amp;type=2#R_Game" style="flex-grow: 1; justify-content: flex-end;">
         <Strayfarer.UI.BindableButton text="Start" on-click="Start" />
+        <Strayfarer.UI.BindableButton text="Call Noah&apos;s API" on-click="Win" />
         <Strayfarer.UI.BindableButton text="Quit" on-click="Quit" />
         <Bindings>
             <ui:DataBinding property="style.display" data-source-path="displayMainMenu" binding-mode="ToTarget" />

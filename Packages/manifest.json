@@ -1,6 +1,7 @@
 {
   "resolutionStrategy": "highestMinor",
   "dependencies": {
+    "com.endel.nativewebsocket": "1.1.5",
     "com.inkle.ink-unity-integration": "1.2.2",
     "com.strayfarer.ui": "1.5.0",
     "com.unity.2d.animation": "12.0.2",
@@ -26,7 +27,8 @@
         "com.rlabrecque.steamworks.net",
         "com.unity.uiextensions",
         "net.tnrd.nsubstitute",
-        "nl.jeffreylanters.tweens"
+        "nl.jeffreylanters.tweens",
+        "com.endel.nativewebsocket"
       ]
     },
     {
