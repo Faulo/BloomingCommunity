@@ -21,7 +21,7 @@ MonoBehaviour:
   moveDuration: 0.25
   facingDuration: 0.1
   blockedDuration: 0.3
-  growDuration: 1
+  growDuration: 0.75
   plantDuration: 1
   harvestDuration: 1
   stepEvent:
