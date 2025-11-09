@@ -18,6 +18,7 @@ WHAT! is THAT!!
 
 # barbara say
 Erin, stop pulling on my arm. 
+# barbara say
 That's where I'm carrying our groceries, aka all your precious snacks! //cocoa puffs, snacks, etc
 
 # erin say
@@ -25,16 +26,14 @@ Mom look! There's a little garden!
 
 # barbara say
 Cute. But, the little garden will still be there tomorrow. 
+# barbara say
 I need to catch a couple of Zs before my night shift Hon. Come on.
 
 # erin say
-Awww :c //add then I dont get to see you sentiment
-But then I have nothing to dooooo
-it's booorriiinngggg.
+Awww :c But then I have nothing to dooooo. It's booorriiinngggg.
 
 # barbara say
-Kid, there ain't two of me. 
-Sit tight, we'll take a look tomorrow after I'm done with work.
+Kid, there ain't two of me. Sit tight, we'll take a look tomorrow after I'm done with work.
 //setup, have her use this line multiple times
 
 # erin say
@@ -49,8 +48,10 @@ Sit tight, we'll take a look tomorrow after I'm done with work.
 # ruth spawn north
 # ruth goto field
 # ruth say
-...they made a new patch of dirt. Right next to my house. Lovely.
-What do I even pay property taxes for when the municipality uses it on ugly, useless nonsence like this.
+...they made a new patch of dirt. Right next to my house.
+# ruth say
+Lovely. What do I even pay property taxes for when the municipality uses it on ugly, useless nonsence like this.
+# ruth say
 They should have put down some flowers immedeatly. This will be overrun with weeds and god knows what before the week is up.
 # ruth goto north
 # ruth despawn
@@ -71,7 +72,8 @@ Bertie had left some tulip bulbs in the window boxes.
 # erin goto field
 # erin say
 I can leave the house a little. I'm 8! That's almost 10!
-//plant dandelion
+# erin plant dan
+# erin say
 There c: puffy flower. Awesome.
 # erin goto east
 # erin despawn
