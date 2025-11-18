@@ -14,7 +14,8 @@
     "com.unity.inputsystem": "1.14.2",
     "com.unity.render-pipelines.universal": "17.2.0",
     "net.slothsoft.aseprite": "1.0.2",
-    "com.unity.modules.particlesystem": "1.0.0"
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0"
   },
   "scopedRegistries": [
     {
