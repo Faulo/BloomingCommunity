@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace BloomingCommunity.Runtime {
 
         sealed class SortIntegersNoDuplicates : IComparer<int> {
             public int Compare(int x, int y) {
-                return x == y ? 1 : x.CompareTo(y);
+                return x == y ? -1 : x.CompareTo(y);
             }
         }
 
@@ -33,15 +34,6 @@ namespace BloomingCommunity.Runtime {
             return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
         }
 
-        static readonly Vector2Int[] directions = new Vector2Int[] {
-            new(0, 1),
-            new(0, -1),
-            new(-1, 0),
-            new(1, 0),
-        };
-
-        static bool ensureOptimalPath = false;
-
         public Vector2Int CalculateMoveIntention(Vector2Int startPosition, IMap map, Vector2Int targetPosition) {
             if (startPosition == targetPosition) {
                 return Vector2Int.zero;
@@ -60,29 +52,30 @@ namespace BloomingCommunity.Runtime {
 
             Dictionary<Vector2Int, Vector2Int> cameFrom = new(capacity);
 
-            List<Vector2Int> queuedPositions = new(capacity) {
-                { targetPosition }
+            SortedList<int, Vector2Int> queuedPositions = new(capacity, new SortIntegersNoDuplicates()) {
+                { 0, targetPosition }
             };
 
-            IComparer<Vector2Int>? sorter = ensureOptimalPath ? new SortPositionsWithHeuristic(goalScores, startPosition) : null;
+            ReadOnlySpan<Vector2Int> directions = stackalloc Vector2Int[] {
+                Vector2Int.up,
+                Vector2Int.right,
+                Vector2Int.down,
+                Vector2Int.left
+            };
 
             while (queuedPositions.Count > 0) {
-                if (ensureOptimalPath) {
-                    queuedPositions.Sort(sorter);
-                }
-
-                var currentPosition = queuedPositions[0];
+                var currentPosition = queuedPositions.Values[0];
                 queuedPositions.RemoveAt(0);
+
+                if (currentPosition == startPosition) {
+                    return cameFrom[startPosition] - startPosition;
+                }
 
                 int randomDirection = URandom.Range(0, 4);
 
                 for (int i = 0; i < 4; i++) {
-                    var direction = directions[(i + randomDirection) % 4];
+                    var direction = directions[(i + randomDirection) & 3];
                     var neighborPosition = currentPosition + direction;
-
-                    if (neighborPosition == startPosition) {
-                        return -direction;
-                    }
 
                     if (!isFreeCache.TryGetValue(neighborPosition, out bool isFree)) {
                         isFreeCache[neighborPosition] = isFree = map.IsFreeToMove(neighborPosition);
@@ -93,7 +86,8 @@ namespace BloomingCommunity.Runtime {
                         if (!goalScores.TryGetValue(neighborPosition, out int oldScore) || oldScore > newScore) {
                             goalScores[neighborPosition] = newScore;
                             cameFrom[neighborPosition] = currentPosition;
-                            queuedPositions.Add(neighborPosition);
+                            int heuristicScore = newScore + HeuristicScore(neighborPosition, targetPosition);
+                            queuedPositions.Add(heuristicScore, neighborPosition);
                         }
                     }
                 }

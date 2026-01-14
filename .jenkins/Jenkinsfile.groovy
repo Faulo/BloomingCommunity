@@ -25,7 +25,7 @@ pipeline {
 							BUILD_DOCUMENTATION : '0',
 
 							// automatically run Unity Test Runner
-							TEST_UNITY : '0',
+							TEST_UNITY : '1',
 
 							// automatically run dotnet format
 							TEST_FORMATTING : '0',
@@ -33,8 +33,8 @@ pipeline {
 
 							// which executables to create
 							BUILD_FOR_WINDOWS : '1',
-							BUILD_FOR_LINUX : '0',
-							BUILD_FOR_MAC : '0',
+							BUILD_FOR_LINUX : '1',
+							BUILD_FOR_MAC : '1',
 							BUILD_FOR_WEBGL : '1',
 							BUILD_FOR_ANDROID : '0',
 
