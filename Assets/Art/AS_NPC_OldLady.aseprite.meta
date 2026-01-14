@@ -28,5 +28,8 @@ ScriptedImporter:
         importAsAnimator: 1
         importAsAnimatorOverride: 0
         referenceController: {instanceID: 0}
+        referenceAnimationSeparator: __
+        warnForMissingAnimations: 1
+        warnForSuperfluousAnimations: 1
         importOverridePrefab: 0
         pixelsPerUnit: 8

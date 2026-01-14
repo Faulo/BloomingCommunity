@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 namespace BloomingCommunity.Runtime {
-    sealed class MapControl {
+    sealed class MapControl : IMap {
         readonly Grid grid;
         readonly Tilemap ground;
         readonly Tilemap objects;
