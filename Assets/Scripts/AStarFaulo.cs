@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Utils;
 using URandom = UnityEngine.Random;
 
 namespace BloomingCommunity.Runtime {
@@ -52,9 +53,8 @@ namespace BloomingCommunity.Runtime {
 
             Dictionary<Vector2Int, Vector2Int> cameFrom = new(capacity);
 
-            SortedList<int, Vector2Int> queuedPositions = new(capacity, new SortIntegersNoDuplicates()) {
-                { 0, targetPosition }
-            };
+            PriorityQueue<Vector2Int, int> queuedPositions = new(capacity);
+            queuedPositions.Enqueue(targetPosition, 0);
 
             ReadOnlySpan<Vector2Int> directions = stackalloc Vector2Int[] {
                 Vector2Int.up,
@@ -63,10 +63,7 @@ namespace BloomingCommunity.Runtime {
                 Vector2Int.left
             };
 
-            while (queuedPositions.Count > 0) {
-                var currentPosition = queuedPositions.Values[0];
-                queuedPositions.RemoveAt(0);
-
+            while (queuedPositions.TryDequeue(out var currentPosition, out _)) {
                 if (currentPosition == startPosition) {
                     return cameFrom[startPosition] - startPosition;
                 }
@@ -87,7 +84,7 @@ namespace BloomingCommunity.Runtime {
                             goalScores[neighborPosition] = newScore;
                             cameFrom[neighborPosition] = currentPosition;
                             int heuristicScore = newScore + HeuristicScore(neighborPosition, targetPosition);
-                            queuedPositions.Add(heuristicScore, neighborPosition);
+                            queuedPositions.Enqueue(neighborPosition, heuristicScore);
                         }
                     }
                 }
